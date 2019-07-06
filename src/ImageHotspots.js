@@ -14,6 +14,8 @@ class ImageHotspots extends React.Component {
     }
 
     this.onImageLoad = this.onImageLoad.bind(this)
+    this.zoomIn = this.zoomIn.bind(this)
+    this.zoomOut = this.zoomOut.bind(this)
   }
 
   render () {
@@ -21,9 +23,9 @@ class ImageHotspots extends React.Component {
 
     if (this.state.initialWidth) {
       if (this.state.orientation === 'landscape') {
-        style.maxHeight = '100vh'
+        style.maxHeight = this.state.scale * 100 + 'vh'
       } else {
-        style.maxWidth = '100vw'
+        style.maxWidth = this.state.scale * 100 + 'vw'
       }
     }
 
@@ -34,6 +36,11 @@ class ImageHotspots extends React.Component {
           onLoad={this.onImageLoad}
           style={style}
         />
+        <div className={styles.controls}>
+          <button onClick={this.zoomIn}>+</button>
+          <br />
+          <button onClick={this.zoomOut}>-</button>
+        </div>
       </div>
     )
   }
@@ -49,6 +56,16 @@ class ImageHotspots extends React.Component {
       orientation,
       scale: 1
     })
+  }
+
+  zoomIn () {
+    this.setState({ scale: this.state.scale + 1 })
+  }
+
+  zoomOut () {
+    if (this.state.scale > 1) {
+      this.setState({ scale: this.state.scale - 1 })
+    }
   }
 }
 

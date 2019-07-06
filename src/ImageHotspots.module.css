@@ -4,3 +4,9 @@
   text-align: center;
   background: #eee;
 }
+
+.controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
