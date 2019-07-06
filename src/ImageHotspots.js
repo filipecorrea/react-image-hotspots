@@ -9,9 +9,13 @@ class ImageHotspots extends React.Component {
     this.state = {
       initialWidth: undefined,
       initialHeight: undefined,
-      orientation: undefined,
-      scale: undefined
+      offsetWidth: undefined,
+      offsetHeight: undefined,
+      scale: undefined,
+      orientation: undefined
     }
+
+    this.image = React.createRef()
 
     this.onImageLoad = this.onImageLoad.bind(this)
     this.zoomIn = this.zoomIn.bind(this)
@@ -19,13 +23,14 @@ class ImageHotspots extends React.Component {
   }
 
   render () {
+    const { initialWidth, initialHeight, scale, orientation } = this.state
     let style = {}
 
-    if (this.state.initialWidth) {
-      if (this.state.orientation === 'landscape') {
-        style.maxHeight = this.state.scale * 100 + 'vh'
+    if (initialWidth && initialHeight) {
+      if (orientation === 'landscape') {
+        style.maxHeight = scale * 100 + 'vh'
       } else {
-        style.maxWidth = this.state.scale * 100 + 'vw'
+        style.maxWidth = scale * 100 + 'vw'
       }
     }
 
@@ -33,6 +38,7 @@ class ImageHotspots extends React.Component {
       <div className={styles.container}>
         <img
           src={image}
+          ref={this.image}
           onLoad={this.onImageLoad}
           style={style}
         />
@@ -59,12 +65,20 @@ class ImageHotspots extends React.Component {
   }
 
   zoomIn () {
-    this.setState({ scale: this.state.scale + 1 })
+    const { offsetWidth, offsetHeight } = this.image.current
+    const { initialWidth, initialHeight, scale } = this.state
+
+    if (offsetWidth < initialWidth && offsetHeight < initialHeight) {
+      this.setState({ scale: scale + 1, offsetWidth, offsetHeight })
+    }
   }
 
   zoomOut () {
+    const { offsetWidth, offsetHeight } = this.image.current
+    const { scale } = this.state
+
     if (this.state.scale > 1) {
-      this.setState({ scale: this.state.scale - 1 })
+      this.setState({ scale: scale - 1, offsetWidth, offsetHeight })
     }
   }
 }
