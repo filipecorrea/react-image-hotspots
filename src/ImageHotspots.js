@@ -18,6 +18,7 @@ class ImageHotspots extends React.Component {
     this.image = React.createRef()
 
     this.onImageLoad = this.onImageLoad.bind(this)
+    this.zoomToFit = this.zoomToFit.bind(this)
     this.zoomIn = this.zoomIn.bind(this)
     this.zoomOut = this.zoomOut.bind(this)
   }
@@ -43,6 +44,8 @@ class ImageHotspots extends React.Component {
           style={style}
         />
         <div className={styles.controls}>
+          <button onClick={this.zoomToFit}>Fit</button>
+          <br />
           <button onClick={this.zoomIn}>+</button>
           <br />
           <button onClick={this.zoomOut}>-</button>
@@ -62,6 +65,15 @@ class ImageHotspots extends React.Component {
       orientation,
       scale: 1
     })
+  }
+
+  zoomToFit () {
+    const { offsetWidth, offsetHeight } = this.image.current
+    const { scale } = this.state
+
+    if (scale > 1) {
+      this.setState({ scale: 1, offsetWidth, offsetHeight })
+    }
   }
 
   zoomIn () {
