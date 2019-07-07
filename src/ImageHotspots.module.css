@@ -1,6 +1,7 @@
 .container {
-  min-width: 100%;
-  min-height: 100%;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
   text-align: center;
   background: #eee;
 }
@@ -9,4 +10,20 @@
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.minimap {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+}
+
+.guide {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  background: #ccc;
 }

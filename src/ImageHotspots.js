@@ -25,13 +25,30 @@ class ImageHotspots extends React.Component {
 
   render () {
     const { initialWidth, initialHeight, scale, orientation } = this.state
-    let style = {}
+
+    let imageStyle = {}
+    let minimapStyle = {}
+    let guideStyle = {}
 
     if (initialWidth && initialHeight) {
       if (orientation === 'landscape') {
-        style.maxHeight = scale * 100 + 'vh'
+        imageStyle.maxHeight = 100 * scale + 'vh'
+
+        const imageRatio = initialWidth / initialHeight
+        minimapStyle.width = 100 * imageRatio + 'px'
+        minimapStyle.height = '100px'
+
+        guideStyle.width = (100 * imageRatio) / scale + 'px'
+        guideStyle.height = 100 / scale + 'px'
       } else {
-        style.maxWidth = scale * 100 + 'vw'
+        imageStyle.maxWidth = 100 * scale + 'vw'
+
+        const imageRatio = initialWidth / initialHeight
+        minimapStyle.width = '100px'
+        minimapStyle.height = 100 * imageRatio + 'px'
+
+        guideStyle.width = 100 / scale + 'px'
+        guideStyle.height = (100 * imageRatio) / scale + 'px'
       }
     }
 
@@ -41,7 +58,7 @@ class ImageHotspots extends React.Component {
           src={image}
           ref={this.image}
           onLoad={this.onImageLoad}
-          style={style}
+          style={imageStyle}
         />
         <div className={styles.controls}>
           <button onClick={this.zoomToFit}>Fit</button>
@@ -49,6 +66,9 @@ class ImageHotspots extends React.Component {
           <button onClick={this.zoomIn}>+</button>
           <br />
           <button onClick={this.zoomOut}>-</button>
+        </div>
+        <div className={styles.minimap} style={minimapStyle}>
+          <div className={styles.guide} style={guideStyle} />
         </div>
       </div>
     )
