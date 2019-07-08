@@ -2,11 +2,16 @@
   "name": "react-image-hotspots",
   "version": "1.0.0",
   "description": "React component for rendering images with hotspots",
-  "main": "src/ImageHotspots.js",
+  "main": "dist/ImageHotspots.js",
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
   "scripts": {
     "pretest": "standard",
     "test": "jest",
-    "start": "start-storybook"
+    "start": "start-storybook",
+    "prepublishOnly": "babel ./src --out-dir ./dist -s inline"
   },
   "repository": {
     "type": "git",
@@ -27,11 +32,17 @@
   },
   "homepage": "https://github.com/filipecorrea/react-image-hotspots#readme",
   "devDependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.0",
     "@storybook/react": "^5.1.9",
     "babel-loader": "^8.0.6",
     "jest": "^24.8.0",
+    "react": "^16.8.6",
     "react-scripts": "^3.0.1",
     "standard": "^12.0.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6"
   },
   "standard": {
     "env": [
