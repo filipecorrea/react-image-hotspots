@@ -23,23 +23,15 @@ class ImageHotspots extends React.Component {
     }
 
     this.container = React.createRef()
-    this.image = React.createRef()
 
     this.onImageLoad = this.onImageLoad.bind(this)
-    this.zoomToFit = this.zoomToFit.bind(this)
-    this.zoomIn = this.zoomIn.bind(this)
-    this.zoomOut = this.zoomOut.bind(this)
+    this.zoom = this.zoom.bind(this)
   }
 
   componentDidMount () {
-    const { offsetWidth, offsetHeight } = this.container.current
+    const { offsetWidth: width, offsetHeight: height } = this.container.current
 
-    this.setState({
-      container: {
-        width: offsetWidth,
-        height: offsetHeight
-      }
-    })
+    this.setState({ container: { width, height } })
   }
 
   render () {
@@ -75,18 +67,13 @@ class ImageHotspots extends React.Component {
 
     return (
       <div ref={this.container} className={styles.container}>
-        <img
-          src={sample}
-          ref={this.image}
-          onLoad={this.onImageLoad}
-          style={imageStyle}
-        />
+        <img src={sample} onLoad={this.onImageLoad} style={imageStyle} />
         <div className={styles.controls}>
-          <button onClick={this.zoomToFit}>Fit</button>
+          <button onClick={() => this.zoom(1)}>Fit</button>
           <br />
-          <button onClick={this.zoomIn}>+</button>
+          <button onClick={() => this.zoom(image.scale + 1)}>+</button>
           <br />
-          <button onClick={this.zoomOut}>-</button>
+          <button onClick={() => this.zoom(image.scale - 1)}>-</button>
         </div>
         <div className={styles.minimap} style={minimapStyle}>
           <div className={styles.guide} style={guideStyle} />
@@ -95,13 +82,11 @@ class ImageHotspots extends React.Component {
     )
   }
 
-  onImageLoad ({ target: img }) {
-    const { offsetWidth: initialWidth, offsetHeight: initialHeight } = img
+  onImageLoad ({ target: image }) {
+    const { offsetWidth: initialWidth, offsetHeight: initialHeight } = image
     const { container } = this.state
     const ratio = initialWidth / initialHeight
-    const orientation = (initialWidth > initialHeight)
-      ? 'landscape'
-      : 'portrait'
+    const orientation = (initialWidth > initialHeight) ? 'landscape' : 'portrait'
 
     this.setState((prevState) => ({
       image: {
@@ -121,70 +106,21 @@ class ImageHotspots extends React.Component {
     }))
   }
 
-  zoomToFit () {
-    const { container, image } = this.state
-    const width = (image.orientation === 'portrait')
-      ? container.width
-      : container.height * image.ratio
-    const height = (image.orientation === 'landscape')
-      ? container.height
-      : container.width * image.ratio
+  zoom (scale) {
+    if (scale > 0) {
+      const { container, image } = this.state
+      const width = (image.orientation === 'portrait')
+        ? container.width * scale
+        : container.height * image.ratio * scale
+      const height = (image.orientation === 'landscape')
+        ? container.height * scale
+        : container.width * image.ratio * scale
 
-    if (image.scale > 1) {
-      this.setState((prevState) => ({
-        image: {
-          ...prevState.image,
-          width,
-          height,
-          scale: 1
-        }
-      }))
-    }
-  }
-
-  zoomIn () {
-    const { container, image } = this.state
-    const orientation = image.orientation
-    const scale = image.scale + 1
-    const width = (orientation === 'portrait')
-      ? container.width * scale
-      : container.height * image.ratio * scale
-    const height = (orientation === 'landscape')
-      ? container.height * scale
-      : container.width * image.ratio * scale
-
-    if (width < image.initialWidth && height < image.initialHeight) {
-      this.setState((prevState) => ({
-        image: {
-          ...prevState.image,
-          width,
-          height,
-          scale
-        }
-      }))
-    }
-  }
-
-  zoomOut () {
-    const { container, image } = this.state
-    const orientation = image.orientation
-    const scale = image.scale - 1
-    const width = (orientation === 'portrait')
-      ? container.width * scale
-      : container.height * image.ratio * scale
-    const height = (orientation === 'landscape')
-      ? container.height * scale
-      : container.width * image.ratio * scale
-
-    if (image.scale > 1) {
-      this.setState((prevState) => ({
-        image: {
-          ...prevState.image,
-          width,
-          height,
-          scale
-        }
-      }))
+      if (width < image.initialWidth && height < image.initialHeight) {
+        this.setState((prevState) => ({
+          image: { ...prevState.image, width, height, scale }
+        }))
+      }
     }
   }
 }
