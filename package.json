@@ -10,8 +10,9 @@
   "scripts": {
     "pretest": "standard",
     "test": "jest",
-    "start": "start-storybook",
-    "prepublishOnly": "babel ./src --out-dir ./dist -s inline"
+    "build": "babel ./src --out-dir ./dist -s inline",
+    "prepublishOnly": "npm test && npm run build",
+    "start": "start-storybook"
   },
   "repository": {
     "type": "git",
