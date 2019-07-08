@@ -22,9 +22,13 @@
     "react",
     "component",
     "image",
-    "hotspot",
+    "picture",
+    "photo",
+    "control",
     "zoom",
-    "controller"
+    "magnify",
+    "minimap",
+    "hotspot"
   ],
   "author": "Filipe Corrêa <filipecorrea@me.com>",
   "license": "MIT",
