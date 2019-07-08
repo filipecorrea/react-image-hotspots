@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './ImageHotspots.module.css'
+// import './ImageHotspots.css'
 
 class ImageHotspots extends React.Component {
   constructor (props) {
@@ -37,9 +37,38 @@ class ImageHotspots extends React.Component {
     const { src, alt } = this.props
     const { container, image } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
+
+    const containerStyle = {
+      width: '100vw',
+      height: '100vh',
+      overflow: 'hidden',
+      textAlign: 'center',
+      background: '#eee'
+    }
+
     let imageStyle = {}
-    let minimapStyle = {}
-    let guideStyle = {}
+
+    const controlsStyle = {
+      position: 'absolute',
+      bottom: 0,
+      right: 0
+    }
+
+    let minimapStyle = {
+      position: 'absolute',
+      display: 'block',
+      bottom: 0,
+      left: 0,
+      background: '#fff'
+    }
+
+    let guideStyle = {
+      position: 'absolute',
+      display: 'block',
+      top: 0,
+      left: 0,
+      background: '#ccc'
+    }
 
     if (imageLoaded) {
       if (image.orientation === 'landscape') {
@@ -66,17 +95,17 @@ class ImageHotspots extends React.Component {
     }
 
     return (
-      <div ref={this.container} className={styles.container}>
+      <div ref={this.container} style={containerStyle}>
         <img src={src} alt={alt} onLoad={this.onImageLoad} style={imageStyle} />
-        <div className={styles.controls}>
+        <div style={controlsStyle}>
           <button onClick={() => this.zoom(1)}>Fit</button>
           <br />
           <button onClick={() => this.zoom(image.scale + 1)}>+</button>
           <br />
           <button onClick={() => this.zoom(image.scale - 1)}>-</button>
         </div>
-        <div className={styles.minimap} style={minimapStyle}>
-          <div className={styles.guide} style={guideStyle} />
+        <div style={minimapStyle}>
+          <div style={guideStyle} />
         </div>
       </div>
     )
