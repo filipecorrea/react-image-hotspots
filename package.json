@@ -53,5 +53,11 @@
     "env": [
       "jest"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^.+\\.(css|sass|scss|less)$": "<rootDir>/mock/empty-module.js",
+      "^.+\\.(png|jpg|jpeg|gif)$": "<rootDir>/mock/empty-module.js"
+    }
   }
 }
