@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './ImageHotspots.module.css'
-import sample from './sample.jpeg'
 
 class ImageHotspots extends React.Component {
   constructor (props) {
@@ -35,6 +34,7 @@ class ImageHotspots extends React.Component {
   }
 
   render () {
+    const { src, alt } = this.props
     const { container, image } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
     let imageStyle = {}
@@ -67,7 +67,7 @@ class ImageHotspots extends React.Component {
 
     return (
       <div ref={this.container} className={styles.container}>
-        <img src={sample} onLoad={this.onImageLoad} style={imageStyle} />
+        <img src={src} alt={alt} onLoad={this.onImageLoad} style={imageStyle} />
         <div className={styles.controls}>
           <button onClick={() => this.zoom(1)}>Fit</button>
           <br />
