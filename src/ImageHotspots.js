@@ -1,5 +1,4 @@
 import React from 'react'
-// import './ImageHotspots.css'
 
 class ImageHotspots extends React.Component {
   constructor (props) {
@@ -39,11 +38,11 @@ class ImageHotspots extends React.Component {
     const imageLoaded = image.initialWidth && image.initialHeight
 
     const containerStyle = {
-      width: '100vw',
-      height: '100vh',
+      width: '100%',
+      height: '100%',
+      position: 'relative',
       overflow: 'hidden',
-      textAlign: 'center',
-      background: '#eee'
+      textAlign: 'center'
     }
 
     let imageStyle = {}
@@ -72,26 +71,16 @@ class ImageHotspots extends React.Component {
 
     if (imageLoaded) {
       if (image.orientation === 'landscape') {
-        imageStyle.height = image.height
-
-        minimapStyle.width = 100 * image.ratio + 'px'
-        minimapStyle.height = 100 + 'px'
-
-        guideStyle.width = (container.width > image.width)
-          ? 100 * image.ratio + 'px'
-          : (100 * image.ratio) / (image.width / container.width) + 'px'
-        guideStyle.height = 100 / image.scale + 'px'
-      } else {
         imageStyle.width = image.width
-
-        minimapStyle.width = 100 + 'px'
-        minimapStyle.height = 100 * image.ratio + 'px'
-
-        guideStyle.width = 100 / image.scale + 'px'
-        guideStyle.height = (container.height > image.height)
-          ? 100 * image.ratio + 'px'
-          : (100 * image.ratio) / (image.height / container.height) + 'px'
+      } else {
+        imageStyle.height = image.height
       }
+      minimapStyle.width = 100 * image.ratio
+      minimapStyle.height = 100
+      guideStyle.width = (container.width > image.width)
+        ? 100 * image.ratio
+        : (100 * image.ratio) / (image.width / container.width)
+      guideStyle.height = 100 / image.scale
     }
 
     return (
@@ -122,12 +111,12 @@ class ImageHotspots extends React.Component {
         ...prevState.image,
         initialWidth,
         initialHeight,
-        width: (orientation === 'portrait')
+        width: (orientation === 'landscape')
           ? container.width
-          : container.height * ratio,
+          : container.height / ratio,
         height: (orientation === 'landscape')
-          ? container.height
-          : container.width * ratio,
+          ? container.width / ratio
+          : container.height,
         scale: 1,
         ratio,
         orientation
@@ -138,12 +127,12 @@ class ImageHotspots extends React.Component {
   zoom (scale) {
     if (scale > 0) {
       const { container, image } = this.state
-      const width = (image.orientation === 'portrait')
+      const width = (image.orientation === 'landscape')
         ? container.width * scale
         : container.height * image.ratio * scale
       const height = (image.orientation === 'landscape')
-        ? container.height * scale
-        : container.width * image.ratio * scale
+        ? container.width * image.ratio / scale
+        : container.height * scale
 
       if (width < image.initialWidth && height < image.initialHeight) {
         this.setState((prevState) => ({
