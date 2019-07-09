@@ -78,8 +78,8 @@ class ImageHotspots extends React.Component {
       display: 'block',
       top: 0,
       left: 0,
-      border: '1px solid #408BFC',
-      background: 'rgba(64, 139, 252, 0.2)'
+      border: '1px solid rgba(64, 139, 252, 0.8)',
+      background: 'rgba(64, 139, 252, 0.1)'
     }
 
     if (imageLoaded) {
@@ -90,16 +90,16 @@ class ImageHotspots extends React.Component {
       }
 
       if (image.orientation === 'landscape') {
-        minimapStyle.width = 100 * image.ratio + 2 // include guide's borders
-        minimapStyle.height = 100 + 2 // include guide's borders
+        minimapStyle.width = 100 * image.ratio
+        minimapStyle.height = 100
 
         guideStyle.width = (container.width >= image.width)
           ? 100 * image.ratio
           : (100 * image.ratio) / (image.width / container.width)
         guideStyle.height = 100 / image.scale
       } else {
-        minimapStyle.width = 100 + 2 // include guide's borders
-        minimapStyle.height = 100 * image.ratio + 2 // include guide's borders
+        minimapStyle.width = 100
+        minimapStyle.height = 100 * image.ratio
 
         guideStyle.width = (container.width >= image.width)
           ? 100
