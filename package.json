@@ -1,6 +1,6 @@
 {
   "name": "react-image-hotspots",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React component for rendering images with hotspots",
   "main": "dist/ImageHotspots.js",
   "files": [
@@ -39,6 +39,7 @@
   "devDependencies": {
     "@babel/cli": "^7.5.0",
     "@babel/core": "^7.5.0",
+    "@storybook/addon-knobs": "^5.1.9",
     "@storybook/react": "^5.1.9",
     "babel-loader": "^8.0.6",
     "jest": "^24.8.0",

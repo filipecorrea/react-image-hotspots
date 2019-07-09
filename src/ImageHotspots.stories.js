@@ -1,16 +1,18 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { withKnobs, text } from '@storybook/addon-knobs'
 import ImageHotspots from './ImageHotspots'
 
-import imageFile from './sample.jpeg'
+import image from './sample.jpeg'
 
-const image = { src: imageFile, alt: 'my image' }
+const stories = storiesOf('ImagesHotspots', module)
 
-storiesOf('ImageHotspots', module)
-  .add('default', () => {
-    return (
-      <div style={{ width: '400px', height: '300px', padding: 20, background: 'black', display: 'flex' }}>
-        <ImageHotspots src={image.src} alt={image.alt} />
-      </div>
-    )
-  })
+stories.addDecorator(withKnobs)
+
+stories.add('default', () => {
+  return (
+    <div style={{ width: '100%', height: '90vh', background: 'black', display: 'flex' }}>
+      <ImageHotspots src={text('Image', image)} alt={text('Alternate text', 'Theatro da Paz')} />
+    </div>
+  )
+})
