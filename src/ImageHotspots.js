@@ -44,23 +44,33 @@ class ImageHotspots extends React.Component {
       height: '100%',
       position: 'relative',
       overflow: 'hidden',
-      textAlign: 'center'
+      textAlign: 'center',
+      background: '#eee'
     }
 
     let imageStyle = {}
 
     const controlsStyle = {
       position: 'absolute',
-      bottom: 0,
-      right: 0
+      bottom: 10,
+      right: 10
+    }
+
+    const buttonStyle = {
+      width: '25px',
+      height: '25px',
+      border: 'none',
+      background: '#fff',
+      boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.5)'
     }
 
     let minimapStyle = {
       position: 'absolute',
       display: 'block',
-      bottom: 0,
-      left: 0,
-      background: '#fff'
+      bottom: 10,
+      left: 10,
+      background: '#fff',
+      boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.5)'
     }
 
     let guideStyle = {
@@ -68,7 +78,8 @@ class ImageHotspots extends React.Component {
       display: 'block',
       top: 0,
       left: 0,
-      background: '#ccc'
+      border: '1px solid #408BFC',
+      background: 'rgba(64, 139, 252, 0.2)'
     }
 
     if (imageLoaded) {
@@ -79,18 +90,18 @@ class ImageHotspots extends React.Component {
       }
 
       if (image.orientation === 'landscape') {
-        minimapStyle.width = 100 * image.ratio
-        minimapStyle.height = 100
+        minimapStyle.width = 100 * image.ratio + 2 // include guide's borders
+        minimapStyle.height = 100 + 2 // include guide's borders
 
-        guideStyle.width = (container.width > image.width)
+        guideStyle.width = (container.width >= image.width)
           ? 100 * image.ratio
           : (100 * image.ratio) / (image.width / container.width)
         guideStyle.height = 100 / image.scale
       } else {
-        minimapStyle.width = 100
-        minimapStyle.height = 100 * image.ratio
+        minimapStyle.width = 100 + 2 // include guide's borders
+        minimapStyle.height = 100 * image.ratio + 2 // include guide's borders
 
-        guideStyle.width = (container.width > image.width)
+        guideStyle.width = (container.width >= image.width)
           ? 100
           : 100 / (image.width / container.width)
         guideStyle.height = 100 * image.ratio / image.scale
@@ -101,11 +112,12 @@ class ImageHotspots extends React.Component {
       <div ref={this.container} style={containerStyle}>
         <img src={src} alt={alt} onLoad={this.onImageLoad} style={imageStyle} />
         <div style={controlsStyle}>
-          <button onClick={() => this.zoom(1)}>Fit</button>
+          <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
           <br />
-          <button onClick={() => this.zoom(image.scale + 1)}>+</button>
           <br />
-          <button onClick={() => this.zoom(image.scale - 1)}>-</button>
+          <button style={buttonStyle} onClick={() => this.zoom(image.scale + 1)}>+</button>
+          <br />
+          <button style={buttonStyle} onClick={() => this.zoom(image.scale - 1)}>-</button>
         </div>
         <div style={minimapStyle}>
           <div style={guideStyle} />
