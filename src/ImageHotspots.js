@@ -24,6 +24,7 @@ class ImageHotspots extends React.Component {
     this.container = React.createRef()
 
     this.onImageLoad = this.onImageLoad.bind(this)
+    this.onWindowResize = this.onWindowResize.bind(this)
     this.zoom = this.zoom.bind(this)
   }
 
@@ -32,6 +33,12 @@ class ImageHotspots extends React.Component {
     const orientation = (width > height) ? 'landscape' : 'portrait'
 
     this.setState({ container: { width, height, orientation } })
+
+    window.addEventListener('resize', this.onWindowResize)
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.onWindowResize)
   }
 
   render () {
@@ -148,6 +155,10 @@ class ImageHotspots extends React.Component {
         orientation
       }
     }))
+  }
+
+  onWindowResize () {
+    this.zoom(this.state.image.scale)
   }
 
   zoom (scale) {
