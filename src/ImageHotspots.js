@@ -24,6 +24,7 @@ class ImageHotspots extends React.Component {
     this.container = React.createRef()
 
     this.onImageLoad = this.onImageLoad.bind(this)
+    this.toggleFullscreen = this.toggleFullscreen.bind(this)
     this.zoom = this.zoom.bind(this)
   }
 
@@ -50,7 +51,13 @@ class ImageHotspots extends React.Component {
 
     let imageStyle = {}
 
-    const controlsStyle = {
+    const topControlsStyle = {
+      position: 'absolute',
+      top: 10,
+      right: 10
+    }
+
+    const bottomControlsStyle = {
       position: 'absolute',
       bottom: 10,
       right: 10
@@ -111,7 +118,10 @@ class ImageHotspots extends React.Component {
     return (
       <div ref={this.container} style={containerStyle}>
         <img src={src} alt={alt} onLoad={this.onImageLoad} style={imageStyle} />
-        <div style={controlsStyle}>
+        <div style={topControlsStyle}>
+          <button style={buttonStyle} onClick={() => this.toggleFullscreen()}>FS</button>
+        </div>
+        <div style={bottomControlsStyle}>
           <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
           <br />
           <br />
@@ -148,6 +158,10 @@ class ImageHotspots extends React.Component {
         orientation
       }
     }))
+  }
+
+  toggleFullscreen () {
+    console.log('toggleFullscreen')
   }
 
   zoom (scale) {
