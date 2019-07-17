@@ -2,11 +2,53 @@
 
 React component for rendering images with zoom controls and hotspots.
 
-## Prerequisites
+## Install
+
+Install from `npm` and include it in your project build process:
+
+```
+npm install react-image-hotspots --save
+```
+
+If your project uses [Yarn](https://yarnpkg.com/en/):
+
+```
+yarn add react-image-hotspots
+```
+
+## Usage
+
+```jsx
+import ImageHotspots from 'react-image-hotspots'
+
+<ImageHotspots
+  src='https://raw.githubusercontent.com/filipecorrea/react-image-hotspots/master/src/landscape.jpg'
+  alt='Sample image'
+  hotspots={
+    [
+      { x: 10, y: 30, content: <span>Hotspot 1</span> },
+      { x: 40, y: 70, content: <span>Hotspot 2</span> },
+      { x: 80, y: 30, content: <span>Hotspot 2</span> }
+    ]
+  }
+/>
+```
+
+### Props
+
+| Props    | Type                         | Default | Description            |
+|----------|------------------------------|---------|------------------------|
+| src      | String, _required_           | -       | Image source           |
+| alt      | String, _optional_           | ""      | Image alternative info |
+| hotspots | Array of objects, _optional_ | []      | Hotspots               |
+
+## Development
+
+### Prerequisites
 
 - [Node.js 10](https://nodejs.org/dist/latest-v10.x/)
 
-## Test
+### Test
 
 From project directory, run:
 
@@ -14,7 +56,7 @@ From project directory, run:
 npm test
 ```
 
-## Run
+### Run
 
 From project directory, run:
 
@@ -22,7 +64,7 @@ From project directory, run:
 npm start
 ```
 
-## Build
+### Build
 
 From project directory, run:
 
