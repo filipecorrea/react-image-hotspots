@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import Hotspot from './Hotspot'
 
 class ImageHotspots extends React.Component {
   constructor (props) {
@@ -18,7 +20,8 @@ class ImageHotspots extends React.Component {
         scale: undefined,
         ratio: undefined,
         orientation: undefined
-      }
+      },
+      hotspots: []
     }
 
     this.container = React.createRef()
@@ -31,8 +34,9 @@ class ImageHotspots extends React.Component {
   componentDidMount () {
     const { offsetWidth: width, offsetHeight: height } = this.container.current
     const orientation = (width > height) ? 'landscape' : 'portrait'
+    const hotspots = this.props.hotspots
 
-    this.setState({ container: { width, height, orientation } })
+    this.setState({ container: { width, height, orientation }, hotspots })
 
     window.addEventListener('resize', this.onWindowResize)
   }
@@ -42,7 +46,7 @@ class ImageHotspots extends React.Component {
   }
 
   render () {
-    const { src, alt } = this.props
+    const { src, alt, hotspots } = this.props
     const { container, image } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
 
@@ -56,6 +60,14 @@ class ImageHotspots extends React.Component {
     }
 
     let imageStyle = {}
+
+    const hotspotsStyle = {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      margin: 'auto'
+    }
 
     const controlsStyle = {
       position: 'absolute',
@@ -97,6 +109,9 @@ class ImageHotspots extends React.Component {
       }
 
       if (image.orientation === 'landscape') {
+        hotspotsStyle.height = image.width / image.ratio
+        hotspotsStyle.width = image.width
+
         minimapStyle.width = 100 * image.ratio
         minimapStyle.height = 100
 
@@ -105,6 +120,9 @@ class ImageHotspots extends React.Component {
           : (100 * image.ratio) / (image.width / container.width)
         guideStyle.height = 100 / image.scale
       } else {
+        hotspotsStyle.height = image.height
+        hotspotsStyle.width = image.height / image.ratio
+
         minimapStyle.width = 100
         minimapStyle.height = 100 * image.ratio
 
@@ -118,6 +136,16 @@ class ImageHotspots extends React.Component {
     return (
       <div ref={this.container} style={containerStyle}>
         <img src={src} alt={alt} onLoad={this.onImageLoad} style={imageStyle} />
+        {
+          hotspots &&
+            <div style={hotspotsStyle}>
+              {
+                hotspots.map(({ x, y, content }) => {
+                  return <Hotspot x={x} y={y} content={content} />
+                })
+              }
+            </div>
+        }
         <div style={controlsStyle}>
           <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
           <br />
@@ -138,18 +166,20 @@ class ImageHotspots extends React.Component {
     const { container } = this.state
     const orientation = (initialWidth > initialHeight) ? 'landscape' : 'portrait'
     const ratio = (orientation === 'landscape') ? initialWidth / initialHeight : initialHeight / initialWidth
+    const width = (container.orientation === 'landscape')
+      ? container.height * ratio
+      : container.width
+    const height = (container.orientation === 'landscape')
+      ? container.height
+      : container.width * ratio
 
     this.setState((prevState) => ({
       image: {
         ...prevState.image,
         initialWidth,
         initialHeight,
-        width: (container.orientation === 'landscape')
-          ? container.height * ratio
-          : container.width,
-        height: (container.orientation === 'landscape')
-          ? container.height
-          : container.width * ratio,
+        width,
+        height,
         scale: 1,
         ratio,
         orientation
@@ -178,6 +208,12 @@ class ImageHotspots extends React.Component {
       }
     }
   }
+}
+
+ImageHotspots.propTypes = {
+  src: PropTypes.string,
+  alt: PropTypes.string,
+  hotspots: PropTypes.array
 }
 
 export default ImageHotspots
