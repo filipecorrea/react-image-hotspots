@@ -38,19 +38,19 @@ import ImageHotspots from 'react-image-hotspots'
 
 | Props          | Type                         | Default | Description            |
 |----------------|------------------------------|---------|------------------------|
-| `src`          | String, _required_           | -       | Image source           |
-| `alt`          | String, _optional_           | ""      | Image alternative info |
-| `hideControls` | Boolean, _optional_          | false   | Hide controls          |
-| `hotspots`     | Array of objects, _optional_ | []      | Hotspots               |
-| `hideHotspots` | Boolean, _optional_          | false   | Hide hotspots          |
+| `src`          | String, _required_           |         | Image source           |
+| `alt`          | String, _optional_           |         | Image alternative info |
+| `hideControls` | Boolean, _optional_          | `false` | Hide controls          |
+| `hotspots`     | Array of objects, _optional_ | `[]`    | Hotspots               |
+| `hideHotspots` | Boolean, _optional_          | `false` | Hide hotspots          |
 
 ### Hotspot properties
 
 | Props     | Type                              | Default | Description                    |
 |-----------|-----------------------------------|---------|--------------------------------|
-| `x`       | Number, _required_                | -       | Percentage horizontal position |
-| `y`       | Number, _required_                | -       | Percentage vertical position   |
-| `content` | React or HTML element, _required_ | -       | Hotspot content                |
+| `x`       | Number, _required_                |         | Percentage horizontal position |
+| `y`       | Number, _required_                |         | Percentage vertical position   |
+| `content` | React or HTML element, _required_ |         | Hotspot content                |
 
 ## Development
 
