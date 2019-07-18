@@ -46,7 +46,7 @@ class ImageHotspots extends React.Component {
   }
 
   render () {
-    const { src, alt, hotspots } = this.props
+    const { src, alt, hotspots, hideControls, hideHotspots } = this.props
     const { container, image } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
 
@@ -137,7 +137,7 @@ class ImageHotspots extends React.Component {
       <div ref={this.container} style={containerStyle}>
         <img src={src} alt={alt} onLoad={this.onImageLoad} style={imageStyle} />
         {
-          hotspots &&
+          !hideHotspots && hotspots &&
             <div style={hotspotsStyle}>
               {
                 hotspots.map(({ x, y, content }) => {
@@ -146,17 +146,22 @@ class ImageHotspots extends React.Component {
               }
             </div>
         }
-        <div style={controlsStyle}>
-          <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
-          <br />
-          <br />
-          <button style={buttonStyle} onClick={() => this.zoom(image.scale + 1)}>+</button>
-          <br />
-          <button style={buttonStyle} onClick={() => this.zoom(image.scale - 1)}>-</button>
-        </div>
-        <div style={minimapStyle}>
-          <div style={guideStyle} />
-        </div>
+        {
+          !hideControls &&
+          <>
+            <div style={controlsStyle}>
+              <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
+              <br />
+              <br />
+              <button style={buttonStyle} onClick={() => this.zoom(image.scale + 1)}>+</button>
+              <br />
+              <button style={buttonStyle} onClick={() => this.zoom(image.scale - 1)}>-</button>
+            </div>
+            <div style={minimapStyle}>
+              <div style={guideStyle} />
+            </div>
+          </>
+        }
       </div>
     )
   }

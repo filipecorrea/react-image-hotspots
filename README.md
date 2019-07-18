@@ -36,11 +36,13 @@ import ImageHotspots from 'react-image-hotspots'
 
 ### Component properties
 
-| Props      | Type                         | Default | Description            |
-|------------|------------------------------|---------|------------------------|
-| `src`      | String, _required_           | -       | Image source           |
-| `alt`      | String, _optional_           | ""      | Image alternative info |
-| `hotspots` | Array of objects, _optional_ | []      | Hotspots               |
+| Props          | Type                         | Default | Description            |
+|----------------|------------------------------|---------|------------------------|
+| `src`          | String, _required_           | -       | Image source           |
+| `alt`          | String, _optional_           | ""      | Image alternative info |
+| `hideControls` | Boolean, _optional_          | false   | Hide controls          |
+| `hotspots`     | Array of objects, _optional_ | []      | Hotspots               |
+| `hideHotspots` | Boolean, _optional_          | false   | Hide hotspots          |
 
 ### Hotspot properties
 

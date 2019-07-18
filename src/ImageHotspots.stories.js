@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { withKnobs, text, object } from '@storybook/addon-knobs'
+import { withKnobs, text, object, boolean } from '@storybook/addon-knobs'
 import ImageHotspots from './ImageHotspots'
 
 import landscape from './landscape.jpg'
@@ -20,7 +20,9 @@ stories.add('default', () => {
       <ImageHotspots
         src={text('Image', landscape)}
         alt={text('Alternate text', 'Sample image')}
+        hideControls={boolean('Hide controls', false)}
         hotspots={object('Hotspots', hotspots)}
+        hideHotspots={boolean('Hide hotspots', false)}
       />
     </div>
   )
@@ -32,7 +34,9 @@ stories.add('landscape image & landscape container', () => {
       <ImageHotspots
         src={text('Image', landscape)}
         alt={text('Alternate text', 'Sample image')}
+        hideControls={boolean('Hide controls', false)}
         hotspots={object('Hotspots', hotspots)}
+        hideHotspots={boolean('Hide hotspots', false)}
       />
     </div>
   )
@@ -44,7 +48,9 @@ stories.add('landscape image & portrait container', () => {
       <ImageHotspots
         src={text('Image', landscape)}
         alt={text('Alternate text', 'Sample image')}
+        hideControls={boolean('Hide controls', false)}
         hotspots={object('Hotspots', hotspots)}
+        hideHotspots={boolean('Hide hotspots', false)}
       />
     </div>
   )
@@ -56,7 +62,9 @@ stories.add('portrait image & landscape container', () => {
       <ImageHotspots
         src={text('Image', portrait)}
         alt={text('Alternate text', 'Sample image')}
+        hideControls={boolean('Hide controls', false)}
         hotspots={object('Hotspots', hotspots)}
+        hideHotspots={boolean('Hide hotspots', false)}
       />
     </div>
   )
@@ -68,7 +76,9 @@ stories.add('portrait image & portrait container', () => {
       <ImageHotspots
         src={text('Image', portrait)}
         alt={text('Alternate text', 'Sample image')}
+        hideControls={boolean('Hide controls', false)}
         hotspots={object('Hotspots', hotspots)}
+        hideHotspots={boolean('Hide hotspots', false)}
       />
     </div>
   )
