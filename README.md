@@ -50,8 +50,8 @@ import ImageHotspots from 'react-image-hotspots'
 
 | Props     | Type                              | Default | Description                    |
 |-----------|-----------------------------------|---------|--------------------------------|
-| `x`       | Number, _required_                |         | Percentage horizontal position |
-| `y`       | Number, _required_                |         | Percentage vertical position   |
+| `x`       | Number, _required_                |         | Percentage vertical position   |
+| `y`       | Number, _required_                |         | Percentage horizontal position |
 | `content` | React or HTML element, _required_ |         | Hotspot content                |
 
 ## Development
