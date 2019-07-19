@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import Hotspot from './Hotspot'
 
 class ImageHotspots extends React.Component {
   constructor (props) {
@@ -18,25 +20,34 @@ class ImageHotspots extends React.Component {
         scale: undefined,
         ratio: undefined,
         orientation: undefined
-      }
+      },
+      hotspots: []
     }
 
     this.container = React.createRef()
 
     this.onImageLoad = this.onImageLoad.bind(this)
     this.toggleFullscreen = this.toggleFullscreen.bind(this)
+    this.onWindowResize = this.onWindowResize.bind(this)
     this.zoom = this.zoom.bind(this)
   }
 
   componentDidMount () {
     const { offsetWidth: width, offsetHeight: height } = this.container.current
     const orientation = (width > height) ? 'landscape' : 'portrait'
+    const hotspots = this.props.hotspots
 
-    this.setState({ container: { width, height, orientation } })
+    this.setState({ container: { width, height, orientation }, hotspots })
+
+    window.addEventListener('resize', this.onWindowResize)
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.onWindowResize)
   }
 
   render () {
-    const { src, alt } = this.props
+    const { src, alt, hotspots, hideControls, hideHotspots } = this.props
     const { container, image } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
 
@@ -51,13 +62,15 @@ class ImageHotspots extends React.Component {
 
     let imageStyle = {}
 
-    const topControlsStyle = {
+    const hotspotsStyle = {
       position: 'absolute',
-      top: 10,
-      right: 10
+      top: 0,
+      left: 0,
+      right: 0,
+      margin: 'auto'
     }
 
-    const bottomControlsStyle = {
+    const controlsStyle = {
       position: 'absolute',
       bottom: 10,
       right: 10
@@ -97,6 +110,9 @@ class ImageHotspots extends React.Component {
       }
 
       if (image.orientation === 'landscape') {
+        hotspotsStyle.height = image.width / image.ratio
+        hotspotsStyle.width = image.width
+
         minimapStyle.width = 100 * image.ratio
         minimapStyle.height = 100
 
@@ -105,6 +121,9 @@ class ImageHotspots extends React.Component {
           : (100 * image.ratio) / (image.width / container.width)
         guideStyle.height = 100 / image.scale
       } else {
+        hotspotsStyle.height = image.height
+        hotspotsStyle.width = image.height / image.ratio
+
         minimapStyle.width = 100
         minimapStyle.height = 100 * image.ratio
 
@@ -118,20 +137,32 @@ class ImageHotspots extends React.Component {
     return (
       <div ref={this.container} style={containerStyle}>
         <img src={src} alt={alt} onLoad={this.onImageLoad} style={imageStyle} />
-        <div style={topControlsStyle}>
-          <button style={buttonStyle} onClick={() => this.toggleFullscreen()}>FS</button>
-        </div>
-        <div style={bottomControlsStyle}>
-          <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
-          <br />
-          <br />
-          <button style={buttonStyle} onClick={() => this.zoom(image.scale + 1)}>+</button>
-          <br />
-          <button style={buttonStyle} onClick={() => this.zoom(image.scale - 1)}>-</button>
-        </div>
-        <div style={minimapStyle}>
-          <div style={guideStyle} />
-        </div>
+        {
+          !hideHotspots && hotspots &&
+            <div style={hotspotsStyle}>
+              {
+                hotspots.map(({ x, y, content }) => {
+                  return <Hotspot x={x} y={y} content={content} />
+                })
+              }
+            </div>
+        }
+        {
+          !hideControls &&
+          <>
+            <div style={controlsStyle}>
+              <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
+              <br />
+              <br />
+              <button style={buttonStyle} onClick={() => this.zoom(image.scale + 1)}>+</button>
+              <br />
+              <button style={buttonStyle} onClick={() => this.zoom(image.scale - 1)}>-</button>
+            </div>
+            <div style={minimapStyle}>
+              <div style={guideStyle} />
+            </div>
+          </>
+        }
       </div>
     )
   }
@@ -141,23 +172,29 @@ class ImageHotspots extends React.Component {
     const { container } = this.state
     const orientation = (initialWidth > initialHeight) ? 'landscape' : 'portrait'
     const ratio = (orientation === 'landscape') ? initialWidth / initialHeight : initialHeight / initialWidth
+    const width = (container.orientation === 'landscape')
+      ? container.height * ratio
+      : container.width
+    const height = (container.orientation === 'landscape')
+      ? container.height
+      : container.width * ratio
 
     this.setState((prevState) => ({
       image: {
         ...prevState.image,
         initialWidth,
         initialHeight,
-        width: (container.orientation === 'landscape')
-          ? container.height * ratio
-          : container.width,
-        height: (container.orientation === 'landscape')
-          ? container.height
-          : container.width * ratio,
+        width,
+        height,
         scale: 1,
         ratio,
         orientation
       }
     }))
+  }
+
+  onWindowResize () {
+    this.zoom(this.state.image.scale)
   }
 
   toggleFullscreen () {
@@ -182,6 +219,12 @@ class ImageHotspots extends React.Component {
       }
     }
   }
+}
+
+ImageHotspots.propTypes = {
+  src: PropTypes.string,
+  alt: PropTypes.string,
+  hotspots: PropTypes.array
 }
 
 export default ImageHotspots
