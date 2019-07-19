@@ -208,8 +208,8 @@ class ImageHotspots extends React.Component {
   }
 
   toggleFullscreen () {
-    var container = document.getElementById('container')
-    var result = Bowser.getParser(window.navigator.userAgent)
+    const container = document.getElementById('container')
+    const result = Bowser.getParser(window.navigator.userAgent)
     switch (result.parsedResult.browser.name) {
       case 'Safari':
         container.webkitRequestFullscreen()
