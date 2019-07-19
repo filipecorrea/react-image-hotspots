@@ -135,7 +135,10 @@ class ImageHotspots extends React.Component {
 
     return (
       <div ref={this.container} style={containerStyle}>
-        <img src={src} alt={alt} onLoad={this.onImageLoad} style={imageStyle} />
+        {
+          src &&
+            <img src={src} alt={alt} onLoad={this.onImageLoad} style={imageStyle} />
+        }
         {
           !hideHotspots && hotspots &&
             <div style={hotspotsStyle}>
