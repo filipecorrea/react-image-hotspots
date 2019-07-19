@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Hotspot from './Hotspot'
-import Bowser from 'bowser'
 
 class ImageHotspots extends React.Component {
   constructor (props) {
@@ -11,7 +10,8 @@ class ImageHotspots extends React.Component {
       container: {
         width: undefined,
         height: undefined,
-        orientation: undefined
+        orientation: undefined,
+        isInFullScreen: undefined
       },
       image: {
         initialWidth: undefined,
@@ -140,9 +140,8 @@ class ImageHotspots extends React.Component {
         guideStyle.height = 100 * image.ratio / image.scale
       }
     }
-
     return (
-      <div id='container' ref={this.container} style={containerStyle}>
+      <div ref={this.container} style={containerStyle}>
         <img src={src} alt={alt} onLoad={this.onImageLoad} style={imageStyle} />
         {
           !hideHotspots && hotspots &&
@@ -158,7 +157,7 @@ class ImageHotspots extends React.Component {
           !hideControls &&
           <>
             <div style={topControlsStyle}>
-              <button style={buttonStyle} onClick={() => this.toggleFullscreen()}>FS</button>
+              <button style={buttonStyle} onClick={() => this.toggleFullscreen()}> { container.isInFullScreen ? 'X' : 'FS' }</button>
             </div>
             <div style={bottomControlsStyle}>
               <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
@@ -208,21 +207,30 @@ class ImageHotspots extends React.Component {
   }
 
   toggleFullscreen () {
-    const container = document.getElementById('container')
-    const result = Bowser.getParser(window.navigator.userAgent)
-    switch (result.parsedResult.browser.name) {
-      case 'Safari':
-        container.webkitRequestFullscreen()
-        break
-      case 'Chrome':
-        container.requestFullscreen()
-        break
-      case 'Firefox':
-        container.mozRequestFullScreen()
-        break
-      case 'IE':
-        container.msRequestFullscreen()
-        break
+    const { container } = this.state
+    let elem = this.container.current
+    if (!container.isInFullScreen) {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen()
+      } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen()
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen()
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen()
+      }
+      this.setState({ container: { isInFullScreen: true } })
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen()
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen()
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen()
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen()
+      }
+      this.setState({ container: { isInFullScreen: false } })
     }
   }
 
