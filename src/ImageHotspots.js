@@ -161,7 +161,8 @@ class ImageHotspots extends React.Component {
   }
 
   toggleFullscreen () {
-    console.log('toggleFullscreen')
+    var container = document.getElementById('root')
+    container.requestFullscreen()
   }
 
   zoom (scale) {
