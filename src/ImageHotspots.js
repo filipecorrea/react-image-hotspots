@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Hotspot from './Hotspot'
+import Bowser from 'bowser'
 
 class ImageHotspots extends React.Component {
   constructor (props) {
@@ -141,7 +142,7 @@ class ImageHotspots extends React.Component {
     }
 
     return (
-      <div ref={this.container} style={containerStyle}>
+      <div id='container' ref={this.container} style={containerStyle}>
         <img src={src} alt={alt} onLoad={this.onImageLoad} style={imageStyle} />
         {
           !hideHotspots && hotspots &&
@@ -207,8 +208,22 @@ class ImageHotspots extends React.Component {
   }
 
   toggleFullscreen () {
-    var container = document.getElementById('root')
-    container.requestFullscreen()
+    var container = document.getElementById('container')
+    var result = Bowser.getParser(window.navigator.userAgent)
+    switch (result.parsedResult.browser.name) {
+      case 'Safari':
+        container.webkitRequestFullscreen()
+        break
+      case 'Chrome':
+        container.requestFullscreen()
+        break
+      case 'Firefox':
+        container.mozRequestFullScreen()
+        break
+      case 'IE':
+        container.msRequestFullscreen()
+        break
+    }
   }
 
   zoom (scale) {

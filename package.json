@@ -61,5 +61,8 @@
       "^.+\\.(css|sass|scss|less)$": "<rootDir>/mock/empty-module.js",
       "^.+\\.(png|jpg|jpeg|gif)$": "<rootDir>/mock/empty-module.js"
     }
+  },
+  "dependencies": {
+    "bowser": "^2.5.2"
   }
 }
