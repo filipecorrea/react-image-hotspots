@@ -70,7 +70,13 @@ class ImageHotspots extends React.Component {
       margin: 'auto'
     }
 
-    const controlsStyle = {
+    const topControlsStyle = {
+      position: 'absolute',
+      top: 10,
+      right: 10
+    }
+
+    const bottomControlsStyle = {
       position: 'absolute',
       bottom: 10,
       right: 10
@@ -150,7 +156,10 @@ class ImageHotspots extends React.Component {
         {
           !hideControls &&
           <>
-            <div style={controlsStyle}>
+            <div style={topControlsStyle}>
+              <button style={buttonStyle} onClick={() => this.toggleFullscreen()}>FS</button>
+            </div>
+            <div style={bottomControlsStyle}>
               <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
               <br />
               <br />
