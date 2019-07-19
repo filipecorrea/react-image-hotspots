@@ -157,7 +157,7 @@ class ImageHotspots extends React.Component {
           !hideControls &&
           <>
             <div style={topControlsStyle}>
-              <button style={buttonStyle} onClick={() => this.toggleFullscreen()}> { container.isInFullScreen ? 'X' : 'FS' }</button>
+              <button style={buttonStyle} onClick={() => this.toggleFullscreen()}> {container.isInFullScreen ? 'X' : 'FS'} </button>
             </div>
             <div style={bottomControlsStyle}>
               <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
