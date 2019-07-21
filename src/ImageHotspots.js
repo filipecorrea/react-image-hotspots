@@ -10,8 +10,7 @@ class ImageHotspots extends React.Component {
       container: {
         width: undefined,
         height: undefined,
-        orientation: undefined,
-        isInFullScreen: undefined
+        orientation: undefined
       },
       image: {
         initialWidth: undefined,
@@ -22,6 +21,7 @@ class ImageHotspots extends React.Component {
         ratio: undefined,
         orientation: undefined
       },
+      isInFullScreen: undefined,
       hotspots: []
     }
 
@@ -49,7 +49,7 @@ class ImageHotspots extends React.Component {
 
   render () {
     const { src, alt, hotspots, hideControls, hideHotspots } = this.props
-    const { container, image } = this.state
+    const { container, image, isInFullScreen } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
 
     const containerStyle = {
@@ -157,7 +157,7 @@ class ImageHotspots extends React.Component {
           !hideControls &&
           <>
             <div style={topControlsStyle}>
-              <button style={buttonStyle} onClick={() => this.toggleFullscreen()}> {container.isInFullScreen ? 'X' : 'FS'} </button>
+              <button style={buttonStyle} onClick={() => this.toggleFullscreen()}> {isInFullScreen ? 'X' : 'FS'} </button>
             </div>
             <div style={bottomControlsStyle}>
               <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
@@ -207,9 +207,9 @@ class ImageHotspots extends React.Component {
   }
 
   toggleFullscreen () {
-    const { container } = this.state
+    const { isInFullScreen } = this.state
     let elem = this.container.current
-    if (!container.isInFullScreen) {
+    if (!isInFullScreen) {
       if (elem.requestFullscreen) {
         elem.requestFullscreen()
       } else if (elem.mozRequestFullScreen) {
@@ -219,7 +219,7 @@ class ImageHotspots extends React.Component {
       } else if (elem.msRequestFullscreen) {
         elem.msRequestFullscreen()
       }
-      this.setState({ container: { isInFullScreen: true } })
+      this.setState({ isInFullScreen: true })
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen()
@@ -230,7 +230,7 @@ class ImageHotspots extends React.Component {
       } else if (document.msExitFullscreen) {
         document.msExitFullscreen()
       }
-      this.setState({ container: { isInFullScreen: false } })
+      this.setState({ isInFullScreen: false })
     }
   }
 
