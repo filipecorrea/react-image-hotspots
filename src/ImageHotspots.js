@@ -21,12 +21,14 @@ class ImageHotspots extends React.Component {
         ratio: undefined,
         orientation: undefined
       },
+      fullscreen: false,
       hotspots: []
     }
 
     this.container = React.createRef()
 
     this.onImageLoad = this.onImageLoad.bind(this)
+    this.toggleFullscreen = this.toggleFullscreen.bind(this)
     this.onWindowResize = this.onWindowResize.bind(this)
     this.zoom = this.zoom.bind(this)
   }
@@ -46,8 +48,8 @@ class ImageHotspots extends React.Component {
   }
 
   render () {
-    const { src, alt, hotspots, hideControls, hideHotspots } = this.props
-    const { container, image } = this.state
+    const { src, alt, hotspots, hideFullscreenControl, hideZoomControls, hideHotspots } = this.props
+    const { container, image, fullscreen } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
 
     const containerStyle = {
@@ -69,7 +71,13 @@ class ImageHotspots extends React.Component {
       margin: 'auto'
     }
 
-    const controlsStyle = {
+    const topControlsStyle = {
+      position: 'absolute',
+      top: 10,
+      right: 10
+    }
+
+    const bottomControlsStyle = {
       position: 'absolute',
       bottom: 10,
       right: 10
@@ -132,7 +140,6 @@ class ImageHotspots extends React.Component {
         guideStyle.height = 100 * image.ratio / image.scale
       }
     }
-
     return (
       <div ref={this.container} style={containerStyle}>
         {
@@ -150,19 +157,27 @@ class ImageHotspots extends React.Component {
             </div>
         }
         {
-          !hideControls &&
-          <>
-            <div style={controlsStyle}>
-              <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
-              <br />
-              <br />
-              <button style={buttonStyle} onClick={() => this.zoom(image.scale + 1)}>+</button>
-              <br />
-              <button style={buttonStyle} onClick={() => this.zoom(image.scale - 1)}>-</button>
+          !hideFullscreenControl &&
+            <div style={topControlsStyle}>
+              <button style={buttonStyle} onClick={() => this.toggleFullscreen()}>
+                {fullscreen ? 'X' : 'FS'}
+              </button>
             </div>
-            <div style={minimapStyle}>
-              <div style={guideStyle} />
-            </div>
+        }
+        {
+          !hideZoomControls &&
+            <>
+              <div style={bottomControlsStyle}>
+                <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
+                <br />
+                <br />
+                <button style={buttonStyle} onClick={() => this.zoom(image.scale + 1)}>+</button>
+                <br />
+                <button style={buttonStyle} onClick={() => this.zoom(image.scale - 1)}>-</button>
+              </div>
+              <div style={minimapStyle}>
+                <div style={guideStyle} />
+              </div>
           </>
         }
       </div>
@@ -199,6 +214,17 @@ class ImageHotspots extends React.Component {
     this.zoom(this.state.image.scale)
   }
 
+  toggleFullscreen () {
+    const { fullscreen } = this.state
+    if (!fullscreen) {
+      this.requestFullscreen(this.container.current)
+      this.setState({ fullscreen: true })
+    } else {
+      this.exitFullscreen()
+      this.setState({ fullscreen: false })
+    }
+  }
+
   zoom (scale) {
     if (scale > 0) {
       const { container, image } = this.state
@@ -214,6 +240,30 @@ class ImageHotspots extends React.Component {
           image: { ...prevState.image, width, height, scale }
         }))
       }
+    }
+  }
+
+  requestFullscreen (element) {
+    if (element.requestFullscreen) {
+      element.requestFullscreen()
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen()
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen()
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen()
+    }
+  }
+
+  exitFullscreen () {
+    if (document.exitFullscreen) {
+      document.exitFullscreen()
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen()
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen()
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen()
     }
   }
 }
