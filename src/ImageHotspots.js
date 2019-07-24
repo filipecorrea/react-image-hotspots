@@ -30,17 +30,9 @@ class ImageHotspots extends React.Component {
     }
 
     this.container = React.createRef()
-
-    this.onImageLoad = this.onImageLoad.bind(this)
-    this.toggleFullscreen = this.toggleFullscreen.bind(this)
-    this.onWindowResize = this.onWindowResize.bind(this)
-    this.startDrag = this.startDrag.bind(this)
-    this.whileDrag = this.whileDrag.bind(this)
-    this.stopDrag = this.stopDrag.bind(this)
-    this.zoom = this.zoom.bind(this)
   }
 
-  componentDidMount () {
+  componentDidMount = () => {
     const { offsetWidth: width, offsetHeight: height } = this.container.current
     const orientation = (width > height) ? 'landscape' : 'portrait'
     const hotspots = this.props.hotspots
@@ -50,11 +42,135 @@ class ImageHotspots extends React.Component {
     window.addEventListener('resize', this.onWindowResize)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount = () => {
     window.removeEventListener('resize', this.onWindowResize)
   }
 
-  render () {
+  startDrag = (evt) => {
+    const cursorX = evt.clientX
+    const cursorY = evt.clientY
+    this.setState(state => ({
+      ...state,
+      cursorX,
+      cursorY,
+      isDragging: true
+    }))
+    evt.preventDefault()
+  }
+
+  whileDrag = (evt) => {
+    const { image } = this.state
+    const cursorX = evt.clientX
+    const cursorY = evt.clientY
+    const dx = cursorX - this.state.cursorX
+    const dy = cursorY - this.state.cursorY
+    const newOffsetX = image.offsetX + dx
+    const newOffsetY = image.offsetY + dy
+    this.setState(state => ({
+      ...state,
+      cursorX,
+      cursorY,
+      image: {
+        ...image,
+        offsetX: newOffsetX,
+        offsetY: newOffsetY
+      }
+    }))
+  }
+
+  stopDrag = () => {
+    this.setState(state => ({
+      ...state,
+      isDragging: false
+    }))
+  }
+
+  onImageLoad = ({ target: image }) => {
+    const { offsetWidth: initialWidth, offsetHeight: initialHeight } = image
+    const { container } = this.state
+    const orientation = (initialWidth > initialHeight) ? 'landscape' : 'portrait'
+    const ratio = (orientation === 'landscape') ? initialWidth / initialHeight : initialHeight / initialWidth
+    const width = (container.orientation === 'landscape')
+      ? container.height * ratio
+      : container.width
+    const height = (container.orientation === 'landscape')
+      ? container.height
+      : container.width * ratio
+
+    this.setState((prevState) => ({
+      image: {
+        ...prevState.image,
+        initialWidth,
+        initialHeight,
+        width,
+        height,
+        scale: 1,
+        ratio,
+        orientation,
+        offsetX: 0,
+        offsetY: 0
+      }
+    }))
+  }
+
+  onWindowResize = () => {
+    this.zoom(this.state.image.scale)
+  }
+
+  toggleFullscreen = () => {
+    const { fullscreen } = this.state
+    if (!fullscreen) {
+      this.requestFullscreen(this.container.current)
+      this.setState({ fullscreen: true })
+    } else {
+      this.exitFullscreen()
+      this.setState({ fullscreen: false })
+    }
+  }
+
+  zoom = (scale) => {
+    if (scale > 0) {
+      const { container, image } = this.state
+      const width = (container.orientation === 'landscape')
+        ? container.height * image.ratio * scale
+        : container.width * scale
+      const height = (container.orientation === 'landscape')
+        ? container.height * scale
+        : container.width * image.ratio * scale
+
+      if (width < image.initialWidth && height < image.initialHeight) {
+        this.setState((prevState) => ({
+          image: { ...prevState.image, width, height, scale }
+        }))
+      }
+    }
+  }
+
+  requestFullscreen = (element) => {
+    if (element.requestFullscreen) {
+      element.requestFullscreen()
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen()
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen()
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen()
+    }
+  }
+
+  exitFullscreen = () => {
+    if (document.exitFullscreen) {
+      document.exitFullscreen()
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen()
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen()
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen()
+    }
+  }
+
+  render = () => {
     const { src, alt, hotspots, hideFullscreenControl, hideZoomControls, hideHotspots } = this.props
     const { container, image, fullscreen, isDragging } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
@@ -198,130 +314,6 @@ class ImageHotspots extends React.Component {
         }
       </div>
     )
-  }
-
-  startDrag (evt) {
-    const cursorX = evt.clientX
-    const cursorY = evt.clientY
-    this.setState(state => ({
-      ...state,
-      cursorX,
-      cursorY,
-      isDragging: true
-    }))
-    evt.preventDefault()
-  }
-
-  whileDrag (evt) {
-    const { image } = this.state
-    const cursorX = evt.clientX
-    const cursorY = evt.clientY
-    const dx = cursorX - this.state.cursorX
-    const dy = cursorY - this.state.cursorY
-    const newOffsetX = image.offsetX + dx
-    const newOffsetY = image.offsetY + dy
-    this.setState(state => ({
-      ...state,
-      cursorX,
-      cursorY,
-      image: {
-        ...image,
-        offsetX: newOffsetX,
-        offsetY: newOffsetY
-      }
-    }))
-  }
-
-  stopDrag () {
-    this.setState(state => ({
-      ...state,
-      isDragging: false
-    }))
-  }
-
-  onImageLoad ({ target: image }) {
-    const { offsetWidth: initialWidth, offsetHeight: initialHeight } = image
-    const { container } = this.state
-    const orientation = (initialWidth > initialHeight) ? 'landscape' : 'portrait'
-    const ratio = (orientation === 'landscape') ? initialWidth / initialHeight : initialHeight / initialWidth
-    const width = (container.orientation === 'landscape')
-      ? container.height * ratio
-      : container.width
-    const height = (container.orientation === 'landscape')
-      ? container.height
-      : container.width * ratio
-
-    this.setState((prevState) => ({
-      image: {
-        ...prevState.image,
-        initialWidth,
-        initialHeight,
-        width,
-        height,
-        scale: 1,
-        ratio,
-        orientation,
-        offsetX: 0,
-        offsetY: 0
-      }
-    }))
-  }
-
-  onWindowResize () {
-    this.zoom(this.state.image.scale)
-  }
-
-  toggleFullscreen () {
-    const { fullscreen } = this.state
-    if (!fullscreen) {
-      this.requestFullscreen(this.container.current)
-      this.setState({ fullscreen: true })
-    } else {
-      this.exitFullscreen()
-      this.setState({ fullscreen: false })
-    }
-  }
-
-  zoom (scale) {
-    if (scale > 0) {
-      const { container, image } = this.state
-      const width = (container.orientation === 'landscape')
-        ? container.height * image.ratio * scale
-        : container.width * scale
-      const height = (container.orientation === 'landscape')
-        ? container.height * scale
-        : container.width * image.ratio * scale
-
-      if (width < image.initialWidth && height < image.initialHeight) {
-        this.setState((prevState) => ({
-          image: { ...prevState.image, width, height, scale }
-        }))
-      }
-    }
-  }
-
-  requestFullscreen (element) {
-    if (element.requestFullscreen) {
-      element.requestFullscreen()
-    } else if (element.mozRequestFullScreen) {
-      element.mozRequestFullScreen()
-    } else if (element.webkitRequestFullscreen) {
-      element.webkitRequestFullscreen()
-    } else if (element.msRequestFullscreen) {
-      element.msRequestFullscreen()
-    }
-  }
-
-  exitFullscreen () {
-    if (document.exitFullscreen) {
-      document.exitFullscreen()
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen()
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen()
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen()
-    }
   }
 }
 
