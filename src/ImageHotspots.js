@@ -56,7 +56,7 @@ class ImageHotspots extends React.Component {
 
   render () {
     const { src, alt, hotspots, hideFullscreenControl, hideZoomControls, hideHotspots } = this.props
-    const { container, image, fullscreen } = this.state
+    const { container, image, fullscreen, isDragging } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
 
     const containerStyle = {
@@ -159,7 +159,7 @@ class ImageHotspots extends React.Component {
             onLoad={this.onImageLoad}
             onMouseDown={evt => this.startDrag(evt)}
             onMouseMove={evt => {
-              if (this.state.isDragging) {
+              if (isDragging) {
                 this.whileDrag(evt)
               }
             }}
