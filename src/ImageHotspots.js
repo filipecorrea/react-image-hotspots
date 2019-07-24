@@ -19,9 +19,13 @@ class ImageHotspots extends React.Component {
         height: undefined,
         scale: undefined,
         ratio: undefined,
-        orientation: undefined
+        orientation: undefined,
+        offsetX: undefined,
+        offsetY: undefined
       },
-      fullscreen: false,
+      cursorX: undefined,
+      cursorY: undefined,
+      isDragging: undefined,
       hotspots: []
     }
 
@@ -30,6 +34,9 @@ class ImageHotspots extends React.Component {
     this.onImageLoad = this.onImageLoad.bind(this)
     this.toggleFullscreen = this.toggleFullscreen.bind(this)
     this.onWindowResize = this.onWindowResize.bind(this)
+    this.startDrag = this.startDrag.bind(this)
+    this.whileDrag = this.whileDrag.bind(this)
+    this.stopDrag = this.stopDrag.bind(this)
     this.zoom = this.zoom.bind(this)
   }
 
@@ -49,7 +56,7 @@ class ImageHotspots extends React.Component {
 
   render () {
     const { src, alt, hotspots, hideFullscreenControl, hideZoomControls, hideHotspots } = this.props
-    const { container, image, fullscreen } = this.state
+    const { container, image, fullscreen, isDragging } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
 
     const containerStyle = {
@@ -61,7 +68,11 @@ class ImageHotspots extends React.Component {
       background: '#eee'
     }
 
-    let imageStyle = {}
+    let imageStyle = {
+      position: 'relative',
+      left: image.offsetX,
+      top: image.offsetY
+    }
 
     const hotspotsStyle = {
       position: 'absolute',
@@ -144,17 +155,22 @@ class ImageHotspots extends React.Component {
       <div ref={this.container} style={containerStyle}>
         {
           src &&
-            <img src={src} alt={alt} onLoad={this.onImageLoad} style={imageStyle} />
+          <img src={src} alt={alt}
+            onLoad={this.onImageLoad}
+            onMouseDown={evt => this.startDrag(evt)}
+            onMouseMove={evt => {
+              if (isDragging) {
+                this.whileDrag(evt)
+              }
+            }}
+            onMouseUp={this.stopDrag}
+            style={imageStyle} />
         }
         {
           !hideHotspots && hotspots &&
-            <div style={hotspotsStyle}>
-              {
-                hotspots.map(({ x, y, content }) => {
-                  return <Hotspot x={x} y={y} content={content} />
-                })
-              }
-            </div>
+              hotspots.map(({ x, y, content }) => {
+                return <Hotspot x={x} y={y} content={content} />
+              })
         }
         {
           !hideFullscreenControl &&
@@ -184,6 +200,45 @@ class ImageHotspots extends React.Component {
     )
   }
 
+  startDrag (evt) {
+    const cursorX = evt.clientX
+    const cursorY = evt.clientY
+    this.setState(state => ({
+      ...state,
+      cursorX,
+      cursorY,
+      isDragging: true
+    }))
+    evt.preventDefault()
+  }
+
+  whileDrag (evt) {
+    const { image } = this.state
+    const cursorX = evt.clientX
+    const cursorY = evt.clientY
+    const dx = cursorX - this.state.cursorX
+    const dy = cursorY - this.state.cursorY
+    const newOffsetX = image.offsetX + dx
+    const newOffsetY = image.offsetY + dy
+    this.setState(state => ({
+      ...state,
+      cursorX,
+      cursorY,
+      image: {
+        ...image,
+        offsetX: newOffsetX,
+        offsetY: newOffsetY
+      }
+    }))
+  }
+
+  stopDrag () {
+    this.setState(state => ({
+      ...state,
+      isDragging: false
+    }))
+  }
+
   onImageLoad ({ target: image }) {
     const { offsetWidth: initialWidth, offsetHeight: initialHeight } = image
     const { container } = this.state
@@ -205,7 +260,9 @@ class ImageHotspots extends React.Component {
         height,
         scale: 1,
         ratio,
-        orientation
+        orientation,
+        offsetX: 0,
+        offsetY: 0
       }
     }))
   }
