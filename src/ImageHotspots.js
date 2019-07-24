@@ -20,7 +20,7 @@ class ImageHotspots extends React.Component {
         scale: undefined,
         ratio: undefined,
         orientation: undefined,
-        offserX: undefined,
+        offsetX: undefined,
         offsetY: undefined
       },
       cursorX: undefined,
