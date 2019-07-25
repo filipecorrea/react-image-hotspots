@@ -277,22 +277,20 @@ class ImageHotspots extends React.Component {
           }
         }}
         onMouseUp={this.stopDrag}>
-        <div style={imageStyle}>
-          {
-            src &&
-            <img src={src} alt={alt}
-              onLoad={this.onImageLoad}
-              style={imageStyle} />
-          }
-          {
-            !hideHotspots && hotspots &&
-            <div style={hotspotsStyle}>
-              { hotspots.map(({ x, y, content }) => {
-                return <Hotspot x={x} y={y} style={hotspotsStyle} offsetX={image.offsetX} offsetY={image.offsetY} content={content} />
-              }) }
-            </div>
-          }
-        </div>
+        {
+          src &&
+          <img src={src} alt={alt}
+            onLoad={this.onImageLoad}
+            style={imageStyle} />
+        }
+        {
+          !hideHotspots && hotspots &&
+          <div style={hotspotsStyle}>
+            { hotspots.map(({ x, y, content }) => {
+              return <Hotspot x={x} y={y} style={hotspotsStyle} offsetX={image.offsetX} offsetY={image.offsetY} content={content} />
+            }) }
+          </div>
+        }
         {
           !hideFullscreenControl &&
             <div style={topControlsStyle}>
