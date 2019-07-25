@@ -280,6 +280,7 @@ class ImageHotspots extends React.Component {
               }
             }}
             onMouseUp={this.stopDrag}
+            onMouseOut={this.stopDrag}
             style={imageStyle} />
         }
         {
