@@ -196,6 +196,7 @@ class ImageHotspots extends React.Component {
       left: 0,
       right: 0,
       margin: 'auto'
+      // pointer-events: none
     }
 
     const topControlsStyle = {
@@ -268,7 +269,7 @@ class ImageHotspots extends React.Component {
       }
     }
     return (
-      <div ref={this.container} style={containerStyle} 
+      <div ref={this.container} style={containerStyle}
         onMouseDown={evt => this.startDrag(evt)}
         onMouseMove={evt => {
           if (isDragging) {
@@ -276,18 +277,22 @@ class ImageHotspots extends React.Component {
           }
         }}
         onMouseUp={this.stopDrag}>
-        {
-          src &&
-          <img src={src} alt={alt}
-            onLoad={this.onImageLoad}
-            style={imageStyle} />
-        }
-        {
-          !hideHotspots && hotspots &&
-              hotspots.map(({ x, y, content }) => {
+        <div style={imageStyle}>
+          {
+            src &&
+            <img src={src} alt={alt}
+              onLoad={this.onImageLoad}
+              style={imageStyle} />
+          }
+          {
+            !hideHotspots && hotspots &&
+            <div style={hotspotsStyle}>
+              { hotspots.map(({ x, y, content }) => {
                 return <Hotspot x={x} y={y} style={hotspotsStyle} offsetX={image.offsetX} offsetY={image.offsetY} content={content} />
-              })
-        }
+              }) }
+            </div>
+          }
+        </div>
         {
           !hideFullscreenControl &&
             <div style={topControlsStyle}>
