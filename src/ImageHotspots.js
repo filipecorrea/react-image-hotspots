@@ -171,7 +171,7 @@ class ImageHotspots extends React.Component {
   }
 
   render = () => {
-    const { src, alt, hotspots, hideFullscreenControl, hideZoomControls, hideHotspots } = this.props
+    const { src, alt, hotspots, hideFullscreenControl, hideZoomControls, hideHotspots, hideMinimap } = this.props
     const { container, image, fullscreen, isDragging } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
 
@@ -317,9 +317,12 @@ class ImageHotspots extends React.Component {
                 <br />
                 <button style={buttonStyle} onClick={() => this.zoom(image.scale - 1)}>-</button>
               </div>
-              <div style={minimapStyle}>
-                <div style={guideStyle} />
-              </div>
+              {
+                !hideMinimap &&
+                  <div style={minimapStyle}>
+                    <div style={guideStyle} />
+                  </div>
+              }
             </>
         }
       </div>
