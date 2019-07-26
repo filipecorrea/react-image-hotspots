@@ -7,11 +7,12 @@ class Hotspot extends React.Component {
 
     const top = offsetY + style.height * y / 100
     const left = offsetX + style.width * x / 100
+
     const hotspotStyle = {
       position: 'absolute',
       display: 'block',
-      top: top + 'px',
-      left: left + 'px',
+      top,
+      left,
       fontFamily: 'Sans-Serif',
       background: '#fff',
       boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.5)'
