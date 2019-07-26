@@ -1,6 +1,6 @@
 {
   "name": "react-image-hotspots",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "React component for rendering images with hotspots",
   "main": "dist/ImageHotspots.js",
   "files": [
@@ -42,11 +42,12 @@
     "@babel/core": "^7.5.0",
     "@storybook/addon-knobs": "^5.1.9",
     "@storybook/react": "^5.1.9",
+    "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
     "jest": "^24.8.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "standard": "^12.0.1"
+    "standard": "^13.1.0"
   },
   "peerDependencies": {
     "react": "^16.8.6"
@@ -55,15 +56,15 @@
     "env": [
       "jest"
     ],
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "ignore": [
+      "docs/"
+    ]
   },
   "jest": {
     "moduleNameMapper": {
       "^.+\\.(css|sass|scss|less)$": "<rootDir>/mock/empty-module.js",
       "^.+\\.(png|jpg|jpeg|gif)$": "<rootDir>/mock/empty-module.js"
     }
-  },
-  "dependencies": {
-    "babel-eslint": "^10.0.2"
   }
 }

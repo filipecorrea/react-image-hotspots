@@ -184,7 +184,7 @@ class ImageHotspots extends React.Component {
       background: '#eee'
     }
 
-    let imageStyle = {
+    const imageStyle = {
       position: 'relative',
       left: image.offsetX,
       top: image.offsetY
@@ -218,7 +218,7 @@ class ImageHotspots extends React.Component {
       boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.5)'
     }
 
-    let minimapStyle = {
+    const minimapStyle = {
       position: 'absolute',
       display: 'block',
       bottom: 10,
@@ -227,7 +227,7 @@ class ImageHotspots extends React.Component {
       boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.5)'
     }
 
-    let guideStyle = {
+    const guideStyle = {
       position: 'absolute',
       display: 'block',
       top: 0,
@@ -320,7 +320,7 @@ class ImageHotspots extends React.Component {
               <div style={minimapStyle}>
                 <div style={guideStyle} />
               </div>
-          </>
+            </>
         }
       </div>
     )

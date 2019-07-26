@@ -21,6 +21,6 @@ describe('ImageHotspots', () => {
       ReactDOM.render(<ImageHotspots />, container)
     })
     const image = container.querySelector('img')
-    expect(isDOMComponent(image)).toBe(true)
+    expect(isDOMComponent(image)).toBe(false)
   })
 })
