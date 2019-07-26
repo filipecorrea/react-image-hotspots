@@ -44,6 +44,7 @@ import ImageHotspots from 'react-image-hotspots'
 | `alt`                   | String, _optional_           |         | Image alternative info  |
 | `hideFullscreenControl` | Boolean, _optional_          | `false` | Hide fullscreen control |
 | `hideZoomControls`      | Boolean, _optional_          | `false` | Hide zoom controls      |
+| `hideMinimap`           | Boolean, _optional_          | `false` | Hide minimap            |
 | `hotspots`              | Array of objects, _optional_ | `[]`    | Hotspots                |
 | `hideHotspots`          | Boolean, _optional_          | `false` | Hide hotspots           |
 
