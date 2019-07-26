@@ -24,6 +24,7 @@ stories.add('default', () => {
         hideZoomControls={boolean('Hide zoom controls', false)}
         hotspots={object('Hotspots', hotspots)}
         hideHotspots={boolean('Hide hotspots', false)}
+        hideMinimap={boolean('Hide Minimap', true)}
       />
     </div>
   )
@@ -39,6 +40,7 @@ stories.add('landscape image & landscape container', () => {
         hideZoomControls={boolean('Hide zoom controls', false)}
         hotspots={object('Hotspots', hotspots)}
         hideHotspots={boolean('Hide hotspots', false)}
+        hideMinimap={boolean('Hide Minimap', true)}
       />
     </div>
   )
@@ -54,6 +56,7 @@ stories.add('landscape image & portrait container', () => {
         hideZoomControls={boolean('Hide zoom controls', false)}
         hotspots={object('Hotspots', hotspots)}
         hideHotspots={boolean('Hide hotspots', false)}
+        hideMinimap={boolean('Hide Minimap', true)}
       />
     </div>
   )
@@ -69,6 +72,7 @@ stories.add('portrait image & landscape container', () => {
         hideZoomControls={boolean('Hide zoom controls', false)}
         hotspots={object('Hotspots', hotspots)}
         hideHotspots={boolean('Hide hotspots', false)}
+        hideMinimap={boolean('Hide Minimap', true)}
       />
     </div>
   )
@@ -84,6 +88,7 @@ stories.add('portrait image & portrait container', () => {
         hideZoomControls={boolean('Hide zoom controls', false)}
         hotspots={object('Hotspots', hotspots)}
         hideHotspots={boolean('Hide hotspots', false)}
+        hideMinimap={boolean('Hide Minimap', true)}
       />
     </div>
   )
