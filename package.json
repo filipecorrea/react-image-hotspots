@@ -10,6 +10,7 @@
   "scripts": {
     "pretest": "standard",
     "test": "jest",
+    "lint": "standard --fix",
     "build": "babel ./src --out-dir ./dist -s inline",
     "build:storybook": "build-storybook -c .storybook -o docs",
     "prepublishOnly": "npm test && npm run build",

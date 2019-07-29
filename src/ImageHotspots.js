@@ -53,7 +53,7 @@ class ImageHotspots extends React.Component {
       hideZoomControls,
       hideHotspots,
       hideMinimap,
-      hotspots 
+      hotspots
     })
 
     window.addEventListener('resize', this.onWindowResize)
@@ -106,8 +106,8 @@ class ImageHotspots extends React.Component {
     const { offsetWidth: initialWidth, offsetHeight: initialHeight } = image
     const { container, hideZoomControls, hideMinimap } = this.state
     const orientation = (initialWidth > initialHeight) ? 'landscape' : 'portrait'
-    const ratio = (orientation === 'landscape') 
-      ? initialWidth / initialHeight 
+    const ratio = (orientation === 'landscape')
+      ? initialWidth / initialHeight
       : initialHeight / initialWidth
     const width = (container.orientation === 'landscape')
       ? container.height * ratio
@@ -196,13 +196,13 @@ class ImageHotspots extends React.Component {
     const { src, alt, hotspots } = this.props
     const {
       container,
-      image, 
-      fullscreen, 
-      isDragging, 
-      hideFullscreenControl, 
-      hideZoomControls, 
-      hideHotspots, 
-      hideMinimap 
+      image,
+      fullscreen,
+      isDragging,
+      hideFullscreenControl,
+      hideZoomControls,
+      hideHotspots,
+      hideMinimap
     } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
 
