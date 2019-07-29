@@ -195,7 +195,8 @@ class ImageHotspots extends React.Component {
       top: 0,
       left: 0,
       right: 0,
-      margin: 'auto'
+      margin: 'auto',
+      pointerEvents: 'none'
     }
 
     const topControlsStyle = {
@@ -271,13 +272,6 @@ class ImageHotspots extends React.Component {
       <div
         ref={this.container}
         style={containerStyle}
-        onMouseDown={evt => this.startDrag(evt)}
-        onMouseMove={evt => {
-          if (isDragging) {
-            this.whileDrag(evt)
-          }
-        }}
-        onMouseUp={this.stopDrag}
       >
         {
           src &&
@@ -286,6 +280,13 @@ class ImageHotspots extends React.Component {
             alt={alt}
             onLoad={this.onImageLoad}
             style={imageStyle}
+            onMouseDown={evt => this.startDrag(evt)}
+            onMouseMove={evt => {
+              if (isDragging) {
+                this.whileDrag(evt)
+              }
+            }}
+            onMouseUp={this.stopDrag}
           />
         }
         {
