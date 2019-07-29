@@ -23,6 +23,10 @@ class ImageHotspots extends React.Component {
         offsetX: undefined,
         offsetY: undefined
       },
+      hideFullscreenControl: false,
+      hideZoomControls: false,
+      hideHotspots: false,
+      hideMinimap: false,
       cursorX: undefined,
       cursorY: undefined,
       isDragging: undefined,
@@ -33,11 +37,24 @@ class ImageHotspots extends React.Component {
   }
 
   componentDidMount = () => {
+    const {
+      hideFullscreenControl,
+      hideZoomControls,
+      hideHotspots,
+      hideMinimap,
+      hotspots
+    } = this.props
     const { offsetWidth: width, offsetHeight: height } = this.container.current
     const orientation = (width > height) ? 'landscape' : 'portrait'
-    const hotspots = this.props.hotspots
 
-    this.setState({ container: { width, height, orientation }, hotspots })
+    this.setState({
+      container: { width, height, orientation },
+      hideFullscreenControl,
+      hideZoomControls,
+      hideHotspots,
+      hideMinimap,
+      hotspots 
+    })
 
     window.addEventListener('resize', this.onWindowResize)
   }
@@ -87,15 +104,18 @@ class ImageHotspots extends React.Component {
 
   onImageLoad = ({ target: image }) => {
     const { offsetWidth: initialWidth, offsetHeight: initialHeight } = image
-    const { container } = this.state
+    const { container, hideZoomControls, hideMinimap } = this.state
     const orientation = (initialWidth > initialHeight) ? 'landscape' : 'portrait'
-    const ratio = (orientation === 'landscape') ? initialWidth / initialHeight : initialHeight / initialWidth
+    const ratio = (orientation === 'landscape') 
+      ? initialWidth / initialHeight 
+      : initialHeight / initialWidth
     const width = (container.orientation === 'landscape')
       ? container.height * ratio
       : container.width
     const height = (container.orientation === 'landscape')
       ? container.height
       : container.width * ratio
+    const resizableImage = (initialWidth < width) || (initialHeight < height)
 
     this.setState((prevState) => ({
       image: {
@@ -109,7 +129,9 @@ class ImageHotspots extends React.Component {
         orientation,
         offsetX: 0,
         offsetY: 0
-      }
+      },
+      hideZoomControls: hideZoomControls || resizableImage,
+      hideMinimap: hideMinimap || resizableImage
     }))
   }
 
@@ -171,8 +193,17 @@ class ImageHotspots extends React.Component {
   }
 
   render = () => {
-    const { src, alt, hotspots, hideFullscreenControl, hideZoomControls, hideHotspots, hideMinimap } = this.props
-    const { container, image, fullscreen, isDragging } = this.state
+    const { src, alt, hotspots } = this.props
+    const {
+      container,
+      image, 
+      fullscreen, 
+      isDragging, 
+      hideFullscreenControl, 
+      hideZoomControls, 
+      hideHotspots, 
+      hideMinimap 
+    } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
 
     const containerStyle = {
@@ -271,9 +302,13 @@ class ImageHotspots extends React.Component {
       <div
         ref={this.container}
         style={containerStyle}
-        onMouseDown={evt => this.startDrag(evt)}
+        onMouseDown={evt => {
+          if (!hideZoomControls) {
+            this.startDrag(evt)
+          }
+        }}
         onMouseMove={evt => {
-          if (isDragging) {
+          if (!hideZoomControls && isDragging) {
             this.whileDrag(evt)
           }
         }}
