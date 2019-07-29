@@ -48,6 +48,8 @@ import ImageHotspots from 'react-image-hotspots'
 | `hotspots`              | Array of objects, _optional_ | `[]`    | Hotspots                |
 | `hideHotspots`          | Boolean, _optional_          | `false` | Hide hotspots           |
 
+If image size is smaller than the container size, zoom controls and minimap will be hidden.
+
 ### Hotspot properties
 
 | Props     | Type                              | Default | Description                    |
