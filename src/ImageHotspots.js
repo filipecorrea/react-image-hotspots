@@ -23,9 +23,18 @@ class ImageHotspots extends React.Component {
         offsetX: undefined,
         offsetY: undefined
       },
+      minimap: {
+        offsetX: 0,
+        offsetY: 0,
+        width: undefined,
+        height: undefined
+      },
       cursorX: undefined,
       cursorY: undefined,
+      mcursorX: undefined,
+      mcursorY: undefined,
       isDragging: undefined,
+      isMDragging: undefined,
       hotspots: []
     }
 
@@ -46,15 +55,24 @@ class ImageHotspots extends React.Component {
     window.removeEventListener('resize', this.onWindowResize)
   }
 
-  startDrag = (evt) => {
+  startDrag = (evt, element) => {
     const cursorX = evt.clientX
     const cursorY = evt.clientY
-    this.setState(state => ({
-      ...state,
-      cursorX,
-      cursorY,
-      isDragging: true
-    }))
+    if (element === 'image') {
+      this.setState(state => ({
+        ...state,
+        cursorX,
+        cursorY,
+        isDragging: true
+      }))
+    } else if (element === 'guide') {
+      this.setState(state => ({
+        ...state,
+        mcursorX: cursorX,
+        mcursorY: cursorY,
+        isMDragging: true
+      }))
+    }
     evt.preventDefault()
   }
 
@@ -170,9 +188,50 @@ class ImageHotspots extends React.Component {
     }
   }
 
+  whileDragGuide = (evt, style) => {
+    const { minimap, image } = this.state
+    const cursorX = evt.clientX
+    const cursorY = evt.clientY
+    const dx = cursorX - this.state.mcursorX
+    const dy = cursorY - this.state.mcursorY
+    const newOffsetX = minimap.offsetX + dx
+    const newOffsetY = minimap.offsetY + dy
+
+    // 1. Calculate new offsetX and offsetY for an image and set the state
+    // 2. Set the boundary for the guide
+
+    const x = evt.pageX - image.offsetX // trial
+    const y = evt.pageY - image.offsetY // trial
+
+    const left = ((style.width / image.width * x) - (newOffsetX / 2)) * -1 // trial
+    const top = ((style.height / image.height * y) - (newOffsetY / 2)) * -1 // trial
+
+    this.setState(state => ({
+      ...state,
+      mcursorX: cursorX,
+      mcursorY: cursorY,
+      image: {
+        ...image,
+        offsetX: left,
+        offsetY: top
+      },
+      minimap: {
+        offsetX: newOffsetX,
+        offsetY: newOffsetY
+      }
+    }))
+  }
+
+  stopDragGuide = () => {
+    this.setState(state => ({
+      ...state,
+      isMDragging: undefined
+    }))
+  }
+
   render = () => {
     const { src, alt, hotspots, hideFullscreenControl, hideZoomControls, hideHotspots, hideMinimap } = this.props
-    const { container, image, fullscreen, isDragging } = this.state
+    const { container, image, minimap, fullscreen, isDragging, isMDragging } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
 
     const containerStyle = {
@@ -231,8 +290,8 @@ class ImageHotspots extends React.Component {
     const guideStyle = {
       position: 'absolute',
       display: 'block',
-      top: 0,
-      left: 0,
+      left: minimap.offsetX,
+      top: minimap.offsetY,
       border: '1px solid rgba(64, 139, 252, 0.8)',
       background: 'rgba(64, 139, 252, 0.1)'
     }
@@ -280,7 +339,7 @@ class ImageHotspots extends React.Component {
             alt={alt}
             onLoad={this.onImageLoad}
             style={imageStyle}
-            onMouseDown={evt => this.startDrag(evt)}
+            onMouseDown={evt => this.startDrag(evt, 'image')}
             onMouseMove={evt => {
               if (isDragging) {
                 this.whileDrag(evt)
@@ -324,7 +383,13 @@ class ImageHotspots extends React.Component {
                     { src &&
                     <img src={src} width={minimapStyle.width} height={minimapStyle.height} />
                     }
-                    <div style={guideStyle} />
+                    <div style={guideStyle} onMouseDown={evt => this.startDrag(evt, 'guide')}
+                      onMouseMove={evt => {
+                        if (isMDragging) {
+                          this.whileDragGuide(evt, guideStyle)
+                        }
+                      }}
+                      onMouseUp={this.stopDragGuide} />
                   </div>
               }
             </>
