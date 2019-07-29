@@ -320,6 +320,9 @@ class ImageHotspots extends React.Component {
               {
                 !hideMinimap &&
                   <div style={minimapStyle}>
+                    { src &&
+                    <img src={src} width={minimapStyle.width} height={minimapStyle.height} />
+                    }
                     <div style={guideStyle} />
                   </div>
               }

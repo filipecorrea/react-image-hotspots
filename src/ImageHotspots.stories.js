@@ -24,7 +24,7 @@ stories.add('default', () => {
         hideZoomControls={boolean('Hide zoom controls', false)}
         hotspots={object('Hotspots', hotspots)}
         hideHotspots={boolean('Hide hotspots', false)}
-        hideMinimap={boolean('Hide Minimap', true)}
+        hideMinimap={boolean('Hide Minimap', false)}
       />
     </div>
   )
