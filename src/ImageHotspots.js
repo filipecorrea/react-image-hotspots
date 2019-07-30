@@ -199,8 +199,15 @@ class ImageHotspots extends React.Component {
 
     // 1. Calculate new offsetX and offsetY for an image and set the state
     // partially working
-    const imageOffsetX = newOffsetX * image.scale * image.scale * image.ratio * -1
-    const imageOffsetY = newOffsetY * image.scale * image.scale * image.ratio * -1
+    let imageOffsetX
+    let imageOffsetY
+    if (image.orientation === 'landscape') {
+      imageOffsetX = newOffsetX * image.scale * image.scale * image.ratio * -1
+      imageOffsetY = newOffsetY * image.scale * image.scale * image.ratio * -1
+    } else {
+      imageOffsetX = newOffsetX * image.scale * image.ratio * image.ratio * -1
+      imageOffsetY = newOffsetY * image.scale * image.ratio * image.ratio * -1
+    }
 
     // 2. Set the boundary for the guide
     // not working
