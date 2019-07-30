@@ -19,18 +19,13 @@ class ImageHotspots extends React.Component {
         height: undefined,
         scale: undefined,
         ratio: undefined,
-        orientation: undefined,
-        offsetX: undefined,
-        offsetY: undefined
+        orientation: undefined
       },
+      hotspots: [],
       hideFullscreenControl: false,
       hideZoomControls: false,
       hideHotspots: false,
-      hideMinimap: false,
-      cursorX: undefined,
-      cursorY: undefined,
-      isDragging: undefined,
-      hotspots: []
+      hideMinimap: false
     }
 
     this.container = React.createRef()
@@ -63,45 +58,6 @@ class ImageHotspots extends React.Component {
     window.removeEventListener('resize', this.onWindowResize)
   }
 
-  startDrag = (evt) => {
-    const cursorX = evt.clientX
-    const cursorY = evt.clientY
-    this.setState(state => ({
-      ...state,
-      cursorX,
-      cursorY,
-      isDragging: true
-    }))
-    evt.preventDefault()
-  }
-
-  whileDrag = (evt) => {
-    const { image } = this.state
-    const cursorX = evt.clientX
-    const cursorY = evt.clientY
-    const dx = cursorX - this.state.cursorX
-    const dy = cursorY - this.state.cursorY
-    const newOffsetX = image.offsetX + dx
-    const newOffsetY = image.offsetY + dy
-    this.setState(state => ({
-      ...state,
-      cursorX,
-      cursorY,
-      image: {
-        ...image,
-        offsetX: newOffsetX,
-        offsetY: newOffsetY
-      }
-    }))
-  }
-
-  stopDrag = () => {
-    this.setState(state => ({
-      ...state,
-      isDragging: false
-    }))
-  }
-
   onImageLoad = ({ target: image }) => {
     const { offsetWidth: initialWidth, offsetHeight: initialHeight } = image
     const { container, hideZoomControls, hideMinimap } = this.state
@@ -126,9 +82,7 @@ class ImageHotspots extends React.Component {
         height,
         scale: 1,
         ratio,
-        orientation,
-        offsetX: 0,
-        offsetY: 0
+        orientation
       },
       hideZoomControls: hideZoomControls || resizableImage,
       hideMinimap: hideMinimap || resizableImage
@@ -299,21 +253,7 @@ class ImageHotspots extends React.Component {
       }
     }
     return (
-      <div
-        ref={this.container}
-        style={containerStyle}
-        onMouseDown={evt => {
-          if (!hideZoomControls) {
-            this.startDrag(evt)
-          }
-        }}
-        onMouseMove={evt => {
-          if (!hideZoomControls && isDragging) {
-            this.whileDrag(evt)
-          }
-        }}
-        onMouseUp={this.stopDrag}
-      >
+      <div ref={this.container} style={containerStyle}>
         {
           src &&
           <img
@@ -328,7 +268,16 @@ class ImageHotspots extends React.Component {
           <div style={hotspotsStyle}>
             {
               hotspots.map(({ x, y, content }) => {
-                return <Hotspot x={x} y={y} style={hotspotsStyle} offsetX={image.offsetX} offsetY={image.offsetY} content={content} />
+                return (
+                  <Hotspot
+                    x={x}
+                    y={y}
+                    style={hotspotsStyle}
+                    offsetX={image.offsetX}
+                    offsetY={image.offsetY}
+                    content={content}
+                  />
+                )
               })
             }
           </div>
