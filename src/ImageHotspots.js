@@ -197,16 +197,20 @@ class ImageHotspots extends React.Component {
     const newOffsetX = minimap.offsetX + dx
     const newOffsetY = minimap.offsetY + dy
 
+    console.log('minimapStyle inside is ', minimapStyle)
+    console.log('guideStyle inside is ', guideStyle)
+
+    const ratio = (minimapStyle.width * minimapStyle.height) / (guideStyle.width * guideStyle.height)
     // 1. Calculate new offsetX and offsetY for an image and set the state
     // partially working
     let imageOffsetX
     let imageOffsetY
     if (image.orientation === 'landscape') {
-      imageOffsetX = newOffsetX * image.scale * image.scale * image.ratio * -1
-      imageOffsetY = newOffsetY * image.scale * image.scale * image.ratio * -1
+      imageOffsetX = newOffsetX * image.scale * image.ratio * ratio * -1
+      imageOffsetY = newOffsetY * image.scale * image.ratio * ratio * -1
     } else {
-      imageOffsetX = newOffsetX * image.scale * image.ratio * image.ratio * -1
-      imageOffsetY = newOffsetY * image.scale * image.ratio * image.ratio * -1
+      imageOffsetX = newOffsetX * image.scale * image.ratio * ratio * -1
+      imageOffsetY = newOffsetY * image.scale * image.ratio * ratio * -1
     }
 
     // 2. Set the boundary for the guide
@@ -340,6 +344,9 @@ class ImageHotspots extends React.Component {
           : 100 / (image.width / container.width)
         guideStyle.height = 100 * image.ratio / image.scale
       }
+
+      console.log('minimapStyle is ', minimapStyle)
+      console.log('guideStyle is ', guideStyle)
     }
     return (
       <div
