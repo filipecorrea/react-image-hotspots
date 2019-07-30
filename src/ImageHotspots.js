@@ -34,7 +34,7 @@ class ImageHotspots extends React.Component {
       mcursorX: undefined,
       mcursorY: undefined,
       isDragging: undefined,
-      isMDragging: undefined,
+      isGuideDragging: undefined,
       hotspots: []
     }
 
@@ -70,7 +70,7 @@ class ImageHotspots extends React.Component {
         ...state,
         mcursorX: cursorX,
         mcursorY: cursorY,
-        isMDragging: true
+        isGuideDragging: true
       }))
     }
     evt.preventDefault()
@@ -188,7 +188,7 @@ class ImageHotspots extends React.Component {
     }
   }
 
-  whileDragGuide = (evt, style) => {
+  whileDragGuide = (evt, guideStyle, minimapStyle) => {
     const { minimap, image } = this.state
     const cursorX = evt.clientX
     const cursorY = evt.clientY
@@ -198,13 +198,20 @@ class ImageHotspots extends React.Component {
     const newOffsetY = minimap.offsetY + dy
 
     // 1. Calculate new offsetX and offsetY for an image and set the state
+    // partially working
+    const imageOffsetX = newOffsetX * image.scale * image.scale * image.ratio * -1
+    const imageOffsetY = newOffsetY * image.scale * image.scale * image.ratio * -1
+
     // 2. Set the boundary for the guide
+    // not working
+    const minBoundX = minimapStyle.left
+    const minBoundY = minimapStyle.bottom
 
-    const x = evt.pageX - image.offsetX // trial
-    const y = evt.pageY - image.offsetY // trial
+    const maxBoundX = minimapStyle.left + minimapStyle.width
+    const maxBoundY = minimapStyle.bottom + minimapStyle.height
 
-    const left = ((style.width / image.width * x) - (newOffsetX / 2)) * -1 // trial
-    const top = ((style.height / image.height * y) - (newOffsetY / 2)) * -1 // trial
+    const guideOffsetX = Math.max(minBoundX, Math.min(newOffsetX, maxBoundX)) + 'px'
+    const guideOffsetY = Math.max(minBoundY, Math.min(newOffsetY, maxBoundY)) + 'px'
 
     this.setState(state => ({
       ...state,
@@ -212,12 +219,12 @@ class ImageHotspots extends React.Component {
       mcursorY: cursorY,
       image: {
         ...image,
-        offsetX: left,
-        offsetY: top
+        offsetX: imageOffsetX,
+        offsetY: imageOffsetY
       },
       minimap: {
-        offsetX: newOffsetX,
-        offsetY: newOffsetY
+        offsetX: newOffsetX, // guideOffsetX,
+        offsetY: newOffsetY // guideOffsetY
       }
     }))
   }
@@ -225,13 +232,13 @@ class ImageHotspots extends React.Component {
   stopDragGuide = () => {
     this.setState(state => ({
       ...state,
-      isMDragging: undefined
+      isGuideDragging: undefined
     }))
   }
 
   render = () => {
     const { src, alt, hotspots, hideFullscreenControl, hideZoomControls, hideHotspots, hideMinimap } = this.props
-    const { container, image, minimap, fullscreen, isDragging, isMDragging } = this.state
+    const { container, image, minimap, fullscreen, isDragging, isGuideDragging } = this.state
     const imageLoaded = image.initialWidth && image.initialHeight
 
     const containerStyle = {
@@ -385,8 +392,8 @@ class ImageHotspots extends React.Component {
                     }
                     <div style={guideStyle} onMouseDown={evt => this.startDrag(evt, 'guide')}
                       onMouseMove={evt => {
-                        if (isMDragging) {
-                          this.whileDragGuide(evt, guideStyle)
+                        if (isGuideDragging) {
+                          this.whileDragGuide(evt, guideStyle, minimapStyle)
                         }
                       }}
                       onMouseUp={this.stopDragGuide} />
