@@ -2,7 +2,6 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { withKnobs, text, object, boolean } from '@storybook/addon-knobs'
 import ImageHotspots from './ImageHotspots'
-
 import landscape from './landscape.jpg'
 import portrait from './portrait.jpg'
 
@@ -11,7 +10,7 @@ const stories = storiesOf('ImagesHotspots', module)
 stories.addDecorator(withKnobs)
 
 const hotspots = [
-  { x: 10, y: 30, content: <span style={{ padding: '10px' }}>Hotspot</span> }
+  { x: 10, y: 30, content: <span style={{ padding: '10px' }}>Hotspot</span>, icon: 'icon--warning--solid' }
 ]
 
 stories.add('default', () => {

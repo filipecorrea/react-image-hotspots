@@ -152,7 +152,7 @@ class ImageHotspots extends React.Component {
       container,
       image,
       fullscreen,
-      isDragging,
+      // isDragging,
       hideFullscreenControl,
       hideZoomControls,
       hideHotspots,
@@ -267,15 +267,13 @@ class ImageHotspots extends React.Component {
           !hideHotspots && hotspots &&
           <div style={hotspotsStyle}>
             {
-              hotspots.map(({ x, y, content }) => {
+              hotspots.map((hotspot) => {
                 return (
                   <Hotspot
-                    x={x}
-                    y={y}
+                    {...hotspot}
                     style={hotspotsStyle}
                     offsetX={image.offsetX}
                     offsetY={image.offsetY}
-                    content={content}
                   />
                 )
               })

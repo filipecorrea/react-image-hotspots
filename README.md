@@ -57,6 +57,7 @@ If image size is smaller than the container size, zoom controls and minimap will
 | `x`       | Number, _required_                |         | Percentage vertical position   |
 | `y`       | Number, _required_                |         | Percentage horizontal position |
 | `content` | React or HTML element, _required_ |         | Hotspot content                |
+| `icon`    | React node that launches the hotspot|        | Icon that launches the hotspot                               |
 
 ## Development
 
