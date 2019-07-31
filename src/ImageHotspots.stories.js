@@ -10,8 +10,8 @@ const stories = storiesOf('ImagesHotspots', module)
 stories.addDecorator(withKnobs)
 
 const hotspots = [
-  { x: 10, y: 30, content: <span style={{ padding: '10px' }}>Hotspot1</span>, icon: 'icon--warning--solid' },
-  { x: 40, y: 50, content: <span style={{ padding: '10px' }}>Hotspot2</span>, icon: 'icon--warning--solid' }
+  { x: 10, y: 30, content: <span style={{ padding: '10px' }}>Hotspot1</span>, icon: 'icon--warning--solid', color: 'green', width: '30', height: '30' },
+  { x: 40, y: 50, content: <span style={{ padding: '10px' }}>Hotspot2</span>, icon: 'icon--warning--solid', color: 'red', width: '10', height: '10' }
 ]
 
 stories.add('default', () => {
