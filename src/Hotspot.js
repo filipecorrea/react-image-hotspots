@@ -8,13 +8,36 @@ class Hotspot extends React.Component {
   render () {
     const { x, y, content, icon, color, width, height } = this.props
 
+    let iconColor
+    color ? iconColor = color : iconColor = 'blue'
+
+    let iconWidth
+    width ? iconWidth = width : iconWidth = 25
+
+    let iconHeight
+    height ? iconHeight = height : iconHeight = 25
+
     const hotspotStyle = {
       position: 'absolute',
       top: y + '%',
       left: x + '%',
       fontFamily: 'Sans-Serif'
     }
-    return <div style={hotspotStyle}><Tooltip triggerText={<Icon fill={color} name={icon} width={width} height={height} />} showIcon={false} clickToOpen triggerId={uuidv1()} tooltipId={uuidv1()}>{content}</Tooltip></div>
+
+    const defaultIcon = <svg width={iconWidth} height={iconHeight}>
+      <circle cx={iconWidth / 2} cy={iconHeight / 2} r={iconWidth / 2} stroke='black' stroke-width='1' fill={iconColor} opacity='0.5' />
+    </svg>
+
+    return <div style={hotspotStyle}>
+      <Tooltip
+        triggerText={icon ? <Icon fill={iconColor} name={icon} width={iconWidth} height={iconHeight} /> : defaultIcon}
+        showIcon={false}
+        clickToOpen
+        triggerId={uuidv1()}
+        tooltipId={uuidv1()}
+      > {content}
+      </Tooltip>
+    </div>
   }
 }
 
