@@ -120,48 +120,21 @@ class ImageHotspots extends React.Component {
 
   stopDrag = () => {
     const { container, image } = this.state
-    console.log('---')
-    console.log('container:', container.width, container.height)
-    console.log('image:', image.width, image.height)
-    console.log('offset:', image.imageOffsetX, image.offsetY)
-
-    const offsetXMax = (container.orientation === image.orientation)
+    const offsetXMax = container.orientation === image.orientation
       ? -Math.abs(image.width - container.width)
       : -Math.abs(container.width - image.width)
-
-    // const offsetXMax = container.orientation === orientation
-    //   ? orientation === 'landscape'
-    //     ? image.width >= container.width
-    //       ? container.width // landscape image bigger than landscape container
-    //       : container.height * ratio // landscape image smaller than landscape container
-    //     : image.height >= container.height
-    //       ? container.height / ratio // portrait image bigger than portrait container
-    //       : container.width // portrait image smaller than portrait container
-    //   : orientation === 'landscape'
-    //     ? container.width // landscape image and portrait container
-    //     : container.height / ratio // portrait image and landscape container
-    
-    const offsetYMax = (container.orientation === image.orientation)
+    const offsetYMax = container.orientation === image.orientation
       ? -Math.abs(container.height - image.height)
       : -Math.abs(image.height - container.height)
-    
-    
-    console.log('offsetMax', offsetXMax, offsetYMax)
+    const deltaX = container.width - image.width - image.offsetX
+    const deltaY = container.height - image.height - image.offsetY
 
     this.setState(state => ({
       ...state,
       image: {
         ...state.image,
-        offsetX: (image.offsetX >= 0) 
-          ? 0
-          : (container.width - image.width - image.offsetX >= 0)
-            ? offsetXMax
-            : image.offsetX,
-        offsetY: (image.offsetY >= 0) 
-          ? 0
-          : (container.height - image.height - image.offsetY >= 0)
-            ? offsetYMax
-            : image.offsetY
+        offsetX: image.offsetX >= 0 ? 0 : deltaX >= 0 ? offsetXMax : image.offsetX,
+        offsetY: image.offsetY >= 0 ? 0 : deltaY >= 0 ? offsetYMax : image.offsetY
       },
       dragging: false
     }))
@@ -175,35 +148,30 @@ class ImageHotspots extends React.Component {
       ? initialWidth / initialHeight
       : initialHeight / initialWidth
 
-    // console.log('container.ratio', container.ratio)
-    // console.log('image.ratio', ratio)
-
     const width = container.orientation === orientation
       ? orientation === 'landscape'
-        ? image.width >= container.width
+        ? ratio >= container.ratio
           ? container.width // landscape image bigger than landscape container
           : container.height * ratio // landscape image smaller than landscape container
-        : image.height >= container.height
+        : ratio >= ratio
           ? container.height / ratio // portrait image bigger than portrait container
           : container.width // portrait image smaller than portrait container
       : orientation === 'landscape'
         ? container.width // landscape image and portrait container
         : container.height / ratio // portrait image and landscape container
-    
-    // console.log('width:', width)
+
     const height = container.orientation === orientation
       ? orientation === 'landscape'
-        ? image.width >= container.width
+        ? ratio >= container.ratio
           ? container.width / ratio // landscape image bigger than landscape container
           : container.height // landscape image smaller than landscape container
-        : image.height >= container.height
+        : ratio >= container.ratio
           ? container.height // portrait image bigger than portrait container
           : container.width * ratio // portrait image smaller than portrait container
       : orientation === 'landscape'
         ? container.width / ratio // landscape image and portrait container
         : container.height // portrait image and landscape container
-    
-    // console.log('height:', height)
+
     const resizable = (initialWidth > width) || (initialHeight > height)
 
     this.setState((prevState) => ({
@@ -244,32 +212,25 @@ class ImageHotspots extends React.Component {
   zoom = (scale) => {
     if (scale > 0) {
       const { container, image } = this.state
-      // const width = (container.orientation === 'landscape')
-      //   ? container.height * image.ratio * scale
-      //   : container.width * scale
+
       const width = container.orientation === image.orientation
         ? image.orientation === 'landscape'
-          ? image.width >= container.width
+          ? image.ratio >= container.ratio
             ? container.width * scale// landscape image bigger than landscape container
             : container.height * image.ratio * scale// landscape image smaller than landscape container
-          : image.height >= container.height
+          : image.ratio >= container.ratio
             ? container.height / image.ratio * scale// portrait image bigger than portrait container
             : container.width * scale// portrait image smaller than portrait container
         : image.orientation === 'landscape'
           ? container.width * scale// landscape image and portrait container
           : container.height / image.ratio * scale// portrait image and landscape container
 
-      
-      // const height = (container.orientation === 'landscape')
-      //   ? container.height * scale
-      //   : container.width * image.ratio * scale
-
       const height = container.orientation === image.orientation
         ? image.orientation === 'landscape'
-          ? image.width >= container.width
+          ? image.ratio >= container.ratio
             ? container.width / image.ratio  * scale// landscape image bigger than landscape container
             : container.height  * scale// landscape image smaller than landscape container
-          : image.height >= container.height
+          : image.ratio >= container.ratio
             ? container.height  * scale// portrait image bigger than portrait container
             : container.width * image.ratio  * scale// portrait image smaller than portrait container
         : image.orientation === 'landscape'
@@ -287,14 +248,11 @@ class ImageHotspots extends React.Component {
           draggable: scale > 1
         }))
       }
+
       // Reset image position
       if (scale === 1) {
         this.setState((prevState) => ({
-          image: {
-            ...prevState.image,
-            offsetX: 0,
-            offsetY: 0
-          }
+          image: { ...prevState.image, offsetX: 0, offsetY: 0 }
         }))
       }
     }
@@ -381,8 +339,6 @@ class ImageHotspots extends React.Component {
   }
 
   render = () => {
-    // console.log('render', this.state)
-
     const { src, alt, hotspots } = this.props
     const {
       container,
