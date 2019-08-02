@@ -20,7 +20,9 @@ class ImageHotspots extends React.Component {
         height: undefined,
         scale: undefined,
         ratio: undefined,
-        orientation: undefined
+        orientation: undefined,
+        offsetX: undefined,
+        offsetY: undefined
       },
       minimap: {
         offsetX: 0,
@@ -151,7 +153,7 @@ class ImageHotspots extends React.Component {
         ? ratio >= container.ratio
           ? container.width // landscape image bigger than landscape container
           : container.height * ratio // landscape image smaller than landscape container
-        : ratio >= ratio
+        : ratio >= container.ratio
           ? container.height / ratio // portrait image bigger than portrait container
           : container.width // portrait image smaller than portrait container
       : orientation === 'landscape'
@@ -181,7 +183,9 @@ class ImageHotspots extends React.Component {
         height,
         scale: 1,
         ratio,
-        orientation
+        orientation,
+        offsetX: 0,
+        offsetY: 0
       },
       hideZoomControls: hideZoomControls || !resizable,
       hideMinimap: hideMinimap || !resizable,
@@ -224,14 +228,14 @@ class ImageHotspots extends React.Component {
       const height = container.orientation === image.orientation
         ? image.orientation === 'landscape'
           ? image.ratio >= container.ratio
-            ? container.width / image.ratio  * scale// landscape image bigger than landscape container
-            : container.height  * scale// landscape image smaller than landscape container
+            ? container.width / image.ratio * scale// landscape image bigger than landscape container
+            : container.height * scale// landscape image smaller than landscape container
           : image.ratio >= container.ratio
-            ? container.height  * scale// portrait image bigger than portrait container
-            : container.width * image.ratio  * scale// portrait image smaller than portrait container
+            ? container.height * scale// portrait image bigger than portrait container
+            : container.width * image.ratio * scale// portrait image smaller than portrait container
         : image.orientation === 'landscape'
-          ? container.width / image.ratio  * scale// landscape image and portrait container
-          : container.height  * scale// portrait image and landscape container
+          ? container.width / image.ratio * scale// landscape image and portrait container
+          : container.height * scale// portrait image and landscape container
 
       if (image.initialWidth > width && image.initialHeight > height) {
         this.setState((prevState) => ({
@@ -455,8 +459,8 @@ class ImageHotspots extends React.Component {
             alt={alt}
             onLoad={this.onImageLoad}
             style={imageStyle}
-            onMouseDown={evt =>{
-              if (draggable && !hideZoomControls) {
+            onMouseDown={evt => {
+              if (!hideZoomControls && draggable) {
                 this.startDrag(evt, 'image')
               }
             }}
