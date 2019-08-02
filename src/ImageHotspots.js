@@ -25,10 +25,11 @@ class ImageHotspots extends React.Component {
         offsetY: undefined
       },
       minimap: {
-        offsetX: 0,
-        offsetY: 0,
+        initialSize: 100,
         width: undefined,
-        height: undefined
+        height: undefined,
+        offsetX: 0,
+        offsetY: 0
       },
       hideFullscreenControl: false,
       hideZoomControls: false,
@@ -87,18 +88,13 @@ class ImageHotspots extends React.Component {
         dragging: true
       }))
     } else if (element === 'guide') {
-      this.setState(state => ({
-        ...state,
-        mcursorX: cursorX,
-        mcursorY: cursorY,
-        isGuideDragging: true
-      }))
+      // TODO
     }
     event.preventDefault()
   }
 
   whileDrag = (event) => {
-    const { image } = this.state
+    const { image, minimap } = this.state
     const cursorX = event.clientX
     const cursorY = event.clientY
     const deltaX = cursorX - this.state.cursorX
@@ -114,12 +110,17 @@ class ImageHotspots extends React.Component {
         ...image,
         offsetX: newOffsetX,
         offsetY: newOffsetY
+      },
+      minimap: {
+        ...minimap,
+        offsetX: -(minimap.width / image.width * newOffsetX),
+        offsetY: -(minimap.height / image.height * newOffsetY)
       }
     }))
   }
 
   stopDrag = () => {
-    const { container, image } = this.state
+    const { container, image, minimap } = this.state
     const offsetXMax = container.orientation === image.orientation
       ? -Math.abs(image.width - container.width)
       : -Math.abs(container.width - image.width)
@@ -136,13 +137,26 @@ class ImageHotspots extends React.Component {
         offsetX: image.offsetX >= 0 ? 0 : deltaX >= 0 ? offsetXMax : image.offsetX,
         offsetY: image.offsetY >= 0 ? 0 : deltaY >= 0 ? offsetYMax : image.offsetY
       },
+      minimap: {
+        ...state.minimap,
+        offsetX: image.offsetX >= 0
+          ? 0
+          : deltaX >= 0
+            ? -(minimap.height / image.height * offsetXMax)
+            : -(minimap.height / image.height * image.offsetX),
+        offsetY: image.offsetY >= 0
+          ? 0
+          : deltaY >= 0
+            ? -(minimap.height / image.height * offsetYMax)
+            : -(minimap.height / image.height * image.offsetY)
+      },
       dragging: false
     }))
   }
 
   onImageLoad = ({ target: image }) => {
     const { offsetWidth: initialWidth, offsetHeight: initialHeight } = image
-    const { container, hideZoomControls, hideMinimap } = this.state
+    const { container, minimap, hideZoomControls, hideMinimap } = this.state
     const orientation = (initialWidth > initialHeight) ? 'landscape' : 'portrait'
     const ratio = (orientation === 'landscape')
       ? initialWidth / initialHeight
@@ -175,6 +189,7 @@ class ImageHotspots extends React.Component {
     const resizable = (initialWidth > width) || (initialHeight > height)
 
     this.setState((prevState) => ({
+      ...prevState,
       image: {
         ...prevState.image,
         initialWidth,
@@ -186,6 +201,15 @@ class ImageHotspots extends React.Component {
         orientation,
         offsetX: 0,
         offsetY: 0
+      },
+      minimap: {
+        ...minimap,
+        width: orientation === 'landscape'
+          ? minimap.initialSize
+          : minimap.initialSize / ratio,
+        height: orientation === 'portrait'
+          ? minimap.initialSize
+          : minimap.initialSize / ratio
       },
       hideZoomControls: hideZoomControls || !resizable,
       hideMinimap: hideMinimap || !resizable,
@@ -282,62 +306,6 @@ class ImageHotspots extends React.Component {
     }
   }
 
-  whileDragGuide = (evt, guideStyle, minimapStyle) => {
-    const { minimap, image } = this.state
-    const cursorX = evt.clientX
-    const cursorY = evt.clientY
-    const dx = cursorX - this.state.mcursorX
-    const dy = cursorY - this.state.mcursorY
-    const newOffsetX = minimap.offsetX + dx
-    const newOffsetY = minimap.offsetY + dy
-
-    const ratio = (minimapStyle.width * minimapStyle.height) / (guideStyle.width * guideStyle.height)
-    // 1. Calculate new offsetX and offsetY for an image and set the state
-    // partially working
-    let imageOffsetX
-    let imageOffsetY
-    if (image.orientation === 'landscape') {
-      imageOffsetX = newOffsetX * image.scale * image.ratio * ratio * -1
-      imageOffsetY = newOffsetY * image.scale * image.ratio * ratio * -1
-    } else {
-      imageOffsetX = newOffsetX * image.scale * image.ratio * ratio * -1
-      imageOffsetY = newOffsetY * image.scale * image.ratio * ratio * -1
-    }
-
-    // 2. Set the boundary for the guide
-    // not working
-    const minBoundX = minimapStyle.left
-    const minBoundY = minimapStyle.bottom
-
-    const maxBoundX = minimapStyle.left + minimapStyle.width
-    const maxBoundY = minimapStyle.bottom + minimapStyle.height
-
-    const guideOffsetX = Math.max(minBoundX, Math.min(newOffsetX, maxBoundX)) + 'px'
-    const guideOffsetY = Math.max(minBoundY, Math.min(newOffsetY, maxBoundY)) + 'px'
-
-    this.setState(state => ({
-      ...state,
-      mcursorX: cursorX,
-      mcursorY: cursorY,
-      image: {
-        ...image,
-        offsetX: imageOffsetX,
-        offsetY: imageOffsetY
-      },
-      minimap: {
-        offsetX: newOffsetX, // guideOffsetX,
-        offsetY: newOffsetY // guideOffsetY
-      }
-    }))
-  }
-
-  stopDragGuide = () => {
-    this.setState(state => ({
-      ...state,
-      isGuideDragging: undefined
-    }))
-  }
-
   render = () => {
     const { src, alt, hotspots } = this.props
     const {
@@ -346,7 +314,6 @@ class ImageHotspots extends React.Component {
       minimap,
       fullscreen,
       dragging,
-      isGuideDragging,
       hideFullscreenControl,
       hideZoomControls,
       hideHotspots,
@@ -402,6 +369,8 @@ class ImageHotspots extends React.Component {
     }
 
     const minimapStyle = {
+      width: minimap.width,
+      height: minimap.height,
       position: 'absolute',
       display: 'block',
       bottom: 10,
@@ -430,24 +399,22 @@ class ImageHotspots extends React.Component {
         hotspotsStyle.height = image.width / image.ratio
         hotspotsStyle.width = image.width
 
-        minimapStyle.width = 100 * image.ratio
-        minimapStyle.height = 100
-
         guideStyle.width = (container.width >= image.width)
-          ? 100 * image.ratio
-          : (100 * image.ratio) / (image.width / container.width)
-        guideStyle.height = 100 / image.scale
+          ? minimap.width * image.scale
+          : minimap.width / (image.width / container.width)
+        guideStyle.height = (container.height >= image.height)
+          ? minimap.height * image.scale
+          : minimap.height / (image.height / container.height)
       } else {
         hotspotsStyle.height = image.height
         hotspotsStyle.width = image.height / image.ratio
 
-        minimapStyle.width = 100
-        minimapStyle.height = 100 * image.ratio
-
         guideStyle.width = (container.width >= image.width)
-          ? 100
-          : 100 / (image.width / container.width)
-        guideStyle.height = 100 * image.ratio / image.scale
+          ? minimap.width
+          : minimap.width / (image.width / container.width)
+        guideStyle.height = (container.height >= image.height)
+          ? minimap.height * image.scale
+          : minimap.height / (image.height / container.height)
       }
     }
     return (
@@ -514,13 +481,7 @@ class ImageHotspots extends React.Component {
                     { src &&
                     <img src={src} width={minimapStyle.width} height={minimapStyle.height} />
                     }
-                    <div style={guideStyle} onMouseDown={evt => this.startDrag(evt, 'guide')}
-                      onMouseMove={evt => {
-                        if (isGuideDragging) {
-                          this.whileDragGuide(evt, guideStyle, minimapStyle)
-                        }
-                      }}
-                      onMouseUp={this.stopDragGuide} />
+                    <div style={guideStyle} />
                   </div>
               }
             </>
