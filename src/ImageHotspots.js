@@ -20,9 +20,7 @@ class ImageHotspots extends React.Component {
         height: undefined,
         scale: undefined,
         ratio: undefined,
-        orientation: undefined,
-        offsetX: undefined,
-        offsetY: undefined
+        orientation: undefined
       },
       minimap: {
         offsetX: 0,
@@ -183,9 +181,7 @@ class ImageHotspots extends React.Component {
         height,
         scale: 1,
         ratio,
-        orientation,
-        offsetX: 0,
-        offsetY: 0
+        orientation
       },
       hideZoomControls: hideZoomControls || !resizable,
       hideMinimap: hideMinimap || !resizable,
@@ -476,8 +472,15 @@ class ImageHotspots extends React.Component {
           !hideHotspots && hotspots &&
           <div style={hotspotsStyle}>
             {
-              hotspots.map(({ x, y, content }) => {
-                return <Hotspot x={x} y={y} style={hotspotsStyle} offsetX={image.offsetX} offsetY={image.offsetY} content={content} />
+              hotspots.map((hotspot) => {
+                return (
+                  <Hotspot
+                    {...hotspot}
+                    style={hotspotsStyle}
+                    offsetX={image.offsetX}
+                    offsetY={image.offsetY}
+                  />
+                )
               })
             }
           </div>
