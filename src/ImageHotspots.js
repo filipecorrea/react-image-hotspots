@@ -376,7 +376,8 @@ class ImageHotspots extends React.Component {
       bottom: 10,
       left: 10,
       background: '#fff',
-      boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.5)'
+      boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.5)',
+      pointerEvents: 'none'
     }
 
     const guideStyle = {
@@ -385,7 +386,8 @@ class ImageHotspots extends React.Component {
       left: minimap.offsetX,
       top: minimap.offsetY,
       border: '1px solid rgba(64, 139, 252, 0.8)',
-      background: 'rgba(64, 139, 252, 0.1)'
+      background: 'rgba(64, 139, 252, 0.1)',
+      pointerEvents: 'none'
     }
 
     if (imageLoaded) {
