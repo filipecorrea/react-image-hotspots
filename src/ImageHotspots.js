@@ -398,27 +398,21 @@ class ImageHotspots extends React.Component {
       }
 
       if (image.orientation === 'landscape') {
-        hotspotsStyle.height = image.width / image.ratio
         hotspotsStyle.width = image.width
-
-        guideStyle.width = (container.width >= image.width)
-          ? minimap.width * image.scale
-          : minimap.width / (image.width / container.width)
-        guideStyle.height = (container.height >= image.height)
-          ? minimap.height * image.scale
-          : minimap.height / (image.height / container.height)
+        hotspotsStyle.height = image.width / image.ratio
       } else {
-        hotspotsStyle.height = image.height
         hotspotsStyle.width = image.height / image.ratio
-
-        guideStyle.width = (container.width >= image.width)
-          ? minimap.width
-          : minimap.width / (image.width / container.width)
-        guideStyle.height = (container.height >= image.height)
-          ? minimap.height * image.scale
-          : minimap.height / (image.height / container.height)
+        hotspotsStyle.height = image.height
       }
+
+      guideStyle.width = (container.width >= image.width)
+        ? minimap.width
+        : minimap.width / (image.width / container.width)
+        guideStyle.height = (container.height >= image.height)
+        ? minimap.height
+        : minimap.height / (image.height / container.height)
     }
+
     return (
       <div ref={this.container} style={containerStyle} onMouseOut={this.stopDrag}>
         {
