@@ -408,7 +408,7 @@ class ImageHotspots extends React.Component {
       guideStyle.width = (container.width >= image.width)
         ? minimap.width
         : minimap.width / (image.width / container.width)
-        guideStyle.height = (container.height >= image.height)
+      guideStyle.height = (container.height >= image.height)
         ? minimap.height
         : minimap.height / (image.height / container.height)
     }
