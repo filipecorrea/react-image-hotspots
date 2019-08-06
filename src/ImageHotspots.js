@@ -339,9 +339,9 @@ class ImageHotspots extends React.Component {
 
     const hotspotsStyle = {
       position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
+      top: image.offsetY,
+      left: image.offsetX,
+      right: (image.offsetX >= 0) ? 0 : 'auto',
       margin: 'auto',
       pointerEvents: 'none'
     }

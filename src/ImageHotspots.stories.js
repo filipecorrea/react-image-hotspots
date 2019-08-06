@@ -41,7 +41,7 @@ stories.add('landscape image & landscape container', () => {
         hideFullscreenControl={boolean('Hide fullscreen control', false)}
         hideZoomControls={boolean('Hide zoom controls', false)}
         hotspots={object('Hotspots', hotspots)}
-        hideHotspots={boolean('Hide hotspots', true)}
+        hideHotspots={boolean('Hide hotspots', false)}
         hideMinimap={boolean('Hide Minimap', false)}
       />
     </div>
