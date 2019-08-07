@@ -21,7 +21,8 @@ class Hotspot extends React.Component {
       position: 'absolute',
       top: y + '%',
       left: x + '%',
-      fontFamily: 'Sans-Serif'
+      fontFamily: 'Sans-Serif',
+      pointerEvents: 'auto'
     }
 
     const defaultIcon = <svg width={iconWidth} height={iconHeight}>

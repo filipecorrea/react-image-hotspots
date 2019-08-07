@@ -200,7 +200,7 @@ class ImageHotspots extends React.Component {
         ratio,
         orientation,
         offsetX: 0,
-        offsetY: 0
+        offsetY: container.height / 2 - height / 2
       },
       minimap: {
         ...minimap,
@@ -267,7 +267,10 @@ class ImageHotspots extends React.Component {
             ...prevState.image,
             width,
             height,
-            scale
+            scale,
+            offsetY: (container.height > height)
+              ? container.height / 2 - height / 2
+              : 0
           },
           draggable: scale > 1
         }))
@@ -276,7 +279,11 @@ class ImageHotspots extends React.Component {
       // Reset image position
       if (scale === 1) {
         this.setState((prevState) => ({
-          image: { ...prevState.image, offsetX: 0, offsetY: 0 }
+          image: {
+            ...prevState.image,
+            offsetX: 0,
+            offsetY: container.height / 2 - height / 2
+          }
         }))
       }
     }
@@ -414,7 +421,15 @@ class ImageHotspots extends React.Component {
     }
 
     return (
-      <div ref={this.container} style={containerStyle} onMouseOut={this.stopDrag}>
+      <div
+        ref={this.container}
+        style={containerStyle}
+        onMouseOut={event => {
+          if (dragging) {
+            this.stopDrag(event)
+          }
+        }}
+      >
         {
           src &&
           <img
@@ -422,17 +437,21 @@ class ImageHotspots extends React.Component {
             alt={alt}
             onLoad={this.onImageLoad}
             style={imageStyle}
-            onMouseDown={evt => {
+            onMouseDown={event => {
               if (!hideZoomControls && draggable) {
-                this.startDrag(evt, 'image')
+                this.startDrag(event, 'image')
               }
             }}
-            onMouseMove={evt => {
+            onMouseMove={event => {
               if (!hideZoomControls && dragging) {
-                this.whileDrag(evt)
+                this.whileDrag(event)
               }
             }}
-            onMouseUp={this.stopDrag}
+            onMouseUp={event => {
+              if (dragging) {
+                this.stopDrag(event)
+              }
+            }}
           />
         }
         {
