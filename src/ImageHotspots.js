@@ -135,16 +135,24 @@ class ImageHotspots extends React.Component {
       image: {
         ...state.image,
         offsetX: image.offsetX >= 0 ? 0 : deltaX >= 0 ? offsetXMax : image.offsetX,
-        offsetY: image.offsetY >= 0 ? 0 : deltaY >= 0 ? offsetYMax : image.offsetY
+        offsetY: image.offsetY >= 0 
+          ? (container.height > image.height)
+            ? container.height / 2 - image.height / 2
+            : 0
+          : deltaY >= 0 
+            ? (container.height > image.height)
+              ? container.height / 2 - image.height / 2
+              : offsetYMax 
+            : image.offsetY,
       },
       minimap: {
         ...state.minimap,
-        offsetX: image.offsetX >= 0
+        offsetX: image.offsetX >= 0 || image.width < container.width
           ? 0
           : deltaX >= 0
             ? -(minimap.height / image.height * offsetXMax)
             : -(minimap.height / image.height * image.offsetX),
-        offsetY: image.offsetY >= 0
+        offsetY: image.offsetY >= 0 || image.height < container.height
           ? 0
           : deltaY >= 0
             ? -(minimap.height / image.height * offsetYMax)
@@ -283,6 +291,11 @@ class ImageHotspots extends React.Component {
             ...prevState.image,
             offsetX: 0,
             offsetY: container.height / 2 - height / 2
+          },
+          minimap: {
+            ...prevState.minimap,
+            offsetX: 0,
+            offsetY: 0
           }
         }))
       }
@@ -425,6 +438,11 @@ class ImageHotspots extends React.Component {
         ref={this.container}
         style={containerStyle}
         onMouseOut={event => {
+          if (dragging) {
+            this.stopDrag(event)
+          }
+        }}
+        onBlur={event => {
           if (dragging) {
             this.stopDrag(event)
           }
