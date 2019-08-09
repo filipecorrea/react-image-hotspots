@@ -135,15 +135,15 @@ class ImageHotspots extends React.Component {
       image: {
         ...state.image,
         offsetX: image.offsetX >= 0 ? 0 : deltaX >= 0 ? offsetXMax : image.offsetX,
-        offsetY: image.offsetY >= 0 
+        offsetY: image.offsetY >= 0
           ? (container.height > image.height)
             ? container.height / 2 - image.height / 2
             : 0
-          : deltaY >= 0 
+          : deltaY >= 0
             ? (container.height > image.height)
               ? container.height / 2 - image.height / 2
-              : offsetYMax 
-            : image.offsetY,
+              : offsetYMax
+            : image.offsetY
       },
       minimap: {
         ...state.minimap,
