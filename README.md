@@ -38,15 +38,16 @@ import ImageHotspots from 'react-image-hotspots'
 
 ### Component properties
 
-| Props                   | Type                         | Default | Description             |
-|-------------------------|------------------------------|---------|-------------------------|
-| `src`                   | String, _required_           |         | Image source            |
-| `alt`                   | String, _optional_           |         | Image alternative info  |
-| `hideFullscreenControl` | Boolean, _optional_          | `false` | Hide fullscreen control |
-| `hideZoomControls`      | Boolean, _optional_          | `false` | Hide zoom controls      |
-| `hideMinimap`           | Boolean, _optional_          | `false` | Hide minimap            |
-| `hotspots`              | Array of objects, _optional_ | `[]`    | Hotspots                |
-| `hideHotspots`          | Boolean, _optional_          | `false` | Hide hotspots           |
+| Props                   | Type                         | Default | Description                |
+|-------------------------|------------------------------|---------|----------------------------|
+| `src`                   | String, _required_           |         | Image source               |
+| `alt`                   | String, _optional_           |         | Image alternative info     |
+| `hideFullscreenControl` | Boolean, _optional_          | `false` | Hide fullscreen control    |
+| `hideZoomControls`      | Boolean, _optional_          | `false` | Hide zoom controls         |
+| `hideMinimap`           | Boolean, _optional_          | `false` | Hide minimap               |
+| `hotspots`              | Array of objects, _optional_ | `[]`    | Hotspots                   |
+| `hideHotspots`          | Boolean, _optional_          | `false` | Hide hotspots              |
+| `background`            | String, _optional_           | `#eee`  | Container background color |
 
 If image size is smaller than the container size, zoom controls and minimap will be hidden.
 

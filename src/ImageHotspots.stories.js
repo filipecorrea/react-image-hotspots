@@ -95,3 +95,15 @@ stories.add('portrait image & portrait container', () => {
     </div>
   )
 })
+
+stories.add('custom background', () => {
+  return (
+    <div style={{ width: '250px', height: '300px' }}>
+      <ImageHotspots
+        src={text('Image', landscape)}
+        alt={text('Alternate text', 'Sample image')}
+        background={text('Background', 'white')}
+      />
+    </div>
+  )
+})

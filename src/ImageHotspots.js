@@ -11,7 +11,8 @@ class ImageHotspots extends React.Component {
         width: undefined,
         height: undefined,
         ratio: undefined,
-        orientation: undefined
+        orientation: undefined,
+        background: '#eee'
       },
       image: {
         initialWidth: undefined,
@@ -55,14 +56,15 @@ class ImageHotspots extends React.Component {
       hideZoomControls,
       hideHotspots,
       hideMinimap,
-      hotspots
+      hotspots,
+      background
     } = this.props
     const { offsetWidth: width, offsetHeight: height } = this.container.current
     const orientation = (width > height) ? 'landscape' : 'portrait'
     const ratio = (orientation === 'landscape') ? width / height : height / width
 
     this.setState({
-      container: { width, height, ratio, orientation },
+      container: { width, height, ratio, orientation, background },
       hideFullscreenControl,
       hideZoomControls,
       hideHotspots,
@@ -327,7 +329,7 @@ class ImageHotspots extends React.Component {
   }
 
   render = () => {
-    const { src, alt, hotspots } = this.props
+    const { src, alt, hotspots, background } = this.props
     const {
       container,
       image,
@@ -348,7 +350,7 @@ class ImageHotspots extends React.Component {
       position: 'relative',
       overflow: 'hidden',
       textAlign: 'center',
-      background: '#eee'
+      background: background || this.state.background
     }
 
     const imageStyle = {
