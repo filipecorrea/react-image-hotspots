@@ -46,8 +46,7 @@ import ImageHotspots from 'react-image-hotspots'
 | `hideZoomControls`      | Boolean, _optional_          | `false` | Hide zoom controls         |
 | `hideMinimap`           | Boolean, _optional_          | `false` | Hide minimap               |
 | `hotspots`              | Array of objects, _optional_ | `[]`    | Hotspots                   |
-| `hideHotspots`          | Boolean, _optional_          | `false` | Hide hotspots              |
-| `background`            | String, _optional_           | `#eee`  | Container background color |
+| `background`            | String, _optional_           |         | Container background color |
 
 If image size is smaller than the container size, zoom controls and minimap will be hidden.
 
@@ -58,7 +57,6 @@ If image size is smaller than the container size, zoom controls and minimap will
 | `x`       | Number, _required_                |         | Percentage vertical position   |
 | `y`       | Number, _required_                |         | Percentage horizontal position |
 | `content` | React or HTML element, _required_ |         | Hotspot content                |
-| `style`   | Object, _optional_                |         | Hotspot CSS style              |
 
 ## Development
 

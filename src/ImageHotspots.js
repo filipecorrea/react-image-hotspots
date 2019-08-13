@@ -34,7 +34,6 @@ class ImageHotspots extends React.Component {
       },
       hideFullscreenControl: false,
       hideZoomControls: false,
-      hideHotspots: false,
       hideMinimap: false,
       resizable: undefined,
       draggable: undefined,
@@ -54,7 +53,6 @@ class ImageHotspots extends React.Component {
     const {
       hideFullscreenControl,
       hideZoomControls,
-      hideHotspots,
       hideMinimap,
       hotspots,
       background
@@ -67,7 +65,6 @@ class ImageHotspots extends React.Component {
       container: { width, height, ratio, orientation, background },
       hideFullscreenControl,
       hideZoomControls,
-      hideHotspots,
       hideMinimap,
       hotspots
     })
@@ -344,7 +341,6 @@ class ImageHotspots extends React.Component {
       dragging,
       hideFullscreenControl,
       hideZoomControls,
-      hideHotspots,
       hideMinimap,
       draggable
     } = this.state
@@ -481,7 +477,7 @@ class ImageHotspots extends React.Component {
           />
         }
         {
-          !hideHotspots && hotspots &&
+          hotspots &&
           <div style={hotspotsStyle}>
             {
               hotspots.map((hotspot) => <Hotspot {...hotspot} />)
