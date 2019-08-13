@@ -1,44 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Tooltip, Icon } from 'carbon-components-react'
-import uuidv1 from 'uuid/v1'
-import 'carbon-components/scss/globals/scss/styles.scss'
 
 class Hotspot extends React.Component {
   render () {
-    const { x, y, content, icon, color, width, height } = this.props
-
-    let iconColor
-    color ? iconColor = color : iconColor = 'blue'
-
-    let iconWidth
-    width ? iconWidth = width : iconWidth = 25
-
-    let iconHeight
-    height ? iconHeight = height : iconHeight = 25
+    const { x, y, content } = this.props
 
     const hotspotStyle = {
       position: 'absolute',
+      display: 'block',
       top: y + '%',
       left: x + '%',
       fontFamily: 'Sans-Serif',
+      background: 'white',
+      boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.5)',
       pointerEvents: 'auto'
     }
 
-    const defaultIcon = <svg width={iconWidth} height={iconHeight}>
-      <circle cx={iconWidth / 2} cy={iconHeight / 2} r={iconWidth / 2} stroke='black' strokeWidth='1' fill={iconColor} opacity='0.5' />
-    </svg>
-
-    return <div style={hotspotStyle}>
-      <Tooltip
-        triggerText={icon ? <Icon fill={iconColor} name={icon} width={iconWidth} height={iconHeight} /> : defaultIcon}
-        showIcon={false}
-        clickToOpen
-        triggerId={uuidv1()}
-        tooltipId={uuidv1()}
-      > {content}
-      </Tooltip>
-    </div>
+    return <div style={hotspotStyle}>{ content }</div>
   }
 }
 
@@ -48,15 +26,7 @@ Hotspot.propTypes = {
   /** percentage from the top of the image to show this hotspot */
   y: PropTypes.number,
   /** the content of the hotspot */
-  content: PropTypes.element,
-  /** points to the name of a carbon icon that will trigger the hotspot (see https://v9.carbondesignsystem.com/guidelines/iconography/library) */
-  icon: PropTypes.string,
-  /** color of the hotspot */
-  color: PropTypes.string,
-  /** width of the hotspot */
-  width: PropTypes.number,
-  /** height of the hotspot */
-  height: PropTypes.number
+  content: PropTypes.element
 }
 
 export default Hotspot

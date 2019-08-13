@@ -10,10 +10,10 @@ const stories = storiesOf('ImagesHotspots', module)
 stories.addDecorator(withKnobs)
 
 const hotspots = [
-  { x: 10, y: 20, content: <span style={{ padding: '10px' }}>Hotspot1</span>, icon: 'icon--warning--solid', color: 'white', width: 20, height: 20 },
-  { x: 50, y: 10, content: <span style={{ padding: '10px' }}>Hotspot2</span>, icon: 'icon--warning--solid' },
-  { x: 30, y: 40, content: <span style={{ padding: '10px' }}>Hotspot3</span> },
-  { x: 50, y: 60, content: <span style={{ padding: '10px' }}>Hotspot4</span>, color: 'green' }
+  { x: 10, y: 20, content: <span style={{ padding: 10 }}>Hotspot1</span> },
+  { x: 50, y: 10, content: <span style={{ padding: 10 }}>Hotspot2</span> },
+  { x: 30, y: 40, content: <span style={{ padding: 10 }}>Hotspot3</span> },
+  { x: 50, y: 60, content: <span style={{ padding: 10 }}>Hotspot4</span> }
 ]
 
 stories.add('default', () => {
@@ -102,7 +102,7 @@ stories.add('custom background', () => {
       <ImageHotspots
         src={text('Image', landscape)}
         alt={text('Alternate text', 'Sample image')}
-        background={text('Background', 'white')}
+        background={text('Background', 'lightGray')}
       />
     </div>
   )

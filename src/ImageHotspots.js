@@ -12,7 +12,7 @@ class ImageHotspots extends React.Component {
         height: undefined,
         ratio: undefined,
         orientation: undefined,
-        background: '#eee'
+        background: undefined
       },
       image: {
         initialWidth: undefined,
@@ -356,7 +356,7 @@ class ImageHotspots extends React.Component {
       position: 'relative',
       overflow: 'hidden',
       textAlign: 'center',
-      background: background || this.state.background
+      background: background || container.background
     }
 
     const imageStyle = {
@@ -484,16 +484,7 @@ class ImageHotspots extends React.Component {
           !hideHotspots && hotspots &&
           <div style={hotspotsStyle}>
             {
-              hotspots.map((hotspot) => {
-                return (
-                  <Hotspot
-                    {...hotspot}
-                    style={hotspotsStyle}
-                    offsetX={image.offsetX}
-                    offsetY={image.offsetY}
-                  />
-                )
-              })
+              hotspots.map((hotspot) => <Hotspot {...hotspot} />)
             }
           </div>
         }

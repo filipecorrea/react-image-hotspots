@@ -58,9 +58,7 @@ If image size is smaller than the container size, zoom controls and minimap will
 | `x`       | Number, _required_                |         | Percentage vertical position   |
 | `y`       | Number, _required_                |         | Percentage horizontal position |
 | `content` | React or HTML element, _required_ |         | Hotspot content                |
-| `icon`    | String                            |         | Icon that launches the hotspot |
-
-More information about Carbon icons [here](https://v9.carbondesignsystem.com/guidelines/iconography/library).
+| `style`   | Object, _optional_                |         | Hotspot CSS style              |
 
 ## Development
 
