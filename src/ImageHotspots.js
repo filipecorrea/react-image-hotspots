@@ -229,6 +229,12 @@ class ImageHotspots extends React.Component {
   }
 
   onWindowResize = () => {
+    const { offsetWidth: width, offsetHeight: height } = this.container.current
+    const orientation = (width > height) ? 'landscape' : 'portrait'
+    const ratio = (orientation === 'landscape') ? width / height : height / width
+
+    this.setState({ container: { width, height, ratio, orientation } })
+
     this.zoom(this.state.image.scale)
   }
 
@@ -503,9 +509,14 @@ class ImageHotspots extends React.Component {
           !hideZoomControls &&
             <>
               <div style={bottomControlsStyle}>
-                <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
-                <br />
-                <br />
+                {
+                  draggable &&
+                    <>
+                      <button style={buttonStyle} onClick={() => this.zoom(1)}>Fit</button>
+                      <br />
+                      <br />
+                    </>
+                }
                 <button style={buttonStyle} onClick={() => this.zoom(image.scale + 1)}>+</button>
                 <br />
                 <button style={buttonStyle} onClick={() => this.zoom(image.scale - 1)}>-</button>

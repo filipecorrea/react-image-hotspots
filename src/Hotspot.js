@@ -26,7 +26,7 @@ class Hotspot extends React.Component {
     }
 
     const defaultIcon = <svg width={iconWidth} height={iconHeight}>
-      <circle cx={iconWidth / 2} cy={iconHeight / 2} r={iconWidth / 2} stroke='black' stroke-width='1' fill={iconColor} opacity='0.5' />
+      <circle cx={iconWidth / 2} cy={iconHeight / 2} r={iconWidth / 2} stroke='black' strokeWidth='1' fill={iconColor} opacity='0.5' />
     </svg>
 
     return <div style={hotspotStyle}>
