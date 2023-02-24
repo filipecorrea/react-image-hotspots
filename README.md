@@ -8,13 +8,13 @@ React component for rendering images with zoom controls and hotspots.
 
 Install from _npm_ and include it in your project build process:
 
-```
+```bash
 npm install react-image-hotspots --save
 ```
 
-Or install from _Yarn_ running:
+Or install from _yarn_ running:
 
-```
+```bash
 yarn add react-image-hotspots
 ```
 
@@ -62,22 +62,28 @@ If image size is smaller than the container size, zoom controls and minimap will
 
 ### Prerequisites
 
-- [Node.js 10](https://nodejs.org/dist/latest-v10.x/)
+- [Node.js](https://nodejs.org)
 
-Test project running:
+### Start
 
-```
-npm test
-```
+Start the project running:
 
-Run project running:
-
-```
+```bash
 npm start
 ```
 
-Build project running:
+### Test
 
+Test the project running:
+
+```bash
+npm test
 ```
+
+### Build
+
+Build the project running:
+
+```bash
 npm run build
 ```
