@@ -8,14 +8,14 @@ class Hotspot extends React.Component {
       background: 'white',
       boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.5)',
       pointerEvents: 'auto'
-    }} = this.props
+    } } = this.props
 
     const hotspotStyle = Object.assign({
       position: 'absolute',
       display: 'block',
       top: y + '%',
-      left: x + '%',
-    }, style);
+      left: x + '%'
+    }, style)
 
     return <div style={hotspotStyle}>{ content }</div>
   }
