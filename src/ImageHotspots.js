@@ -534,7 +534,7 @@ class ImageHotspots extends React.Component {
           hotspots &&
           <div style={hotspotsStyle}>
             {
-              hotspots.map((hotspot) => <Hotspot {...hotspot} />)
+              hotspots.map((hotspot, i) => <Hotspot key={i} {...hotspot} />)
             }
           </div>
         }
