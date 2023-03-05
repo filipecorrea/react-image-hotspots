@@ -5,5 +5,9 @@
   ],
   "plugins": [
     "@babel/plugin-proposal-class-properties",
+  ],
+  "ignore": [
+    "**/*.test.js",
+    "**/*.stories.js"
   ]
 }
