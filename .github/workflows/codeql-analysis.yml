@@ -8,6 +8,11 @@ on:
   schedule:
     - cron: '40 15 * * 6'
 
+paths:
+  - src
+paths-ignore:
+  - '**/*.test.js'
+
 jobs:
   analyze:
     name: Analyze
@@ -29,7 +34,3 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
-      paths:
-        - src
-      paths-ignore:
-        - '**/*.test.js'
