@@ -12,6 +12,7 @@
     "test": "jest",
     "lint": "standard --fix",
     "build": "babel ./src --out-dir ./dist -s inline",
+    "build:prod": "babel ./src --out-dir ./dist --ignore '**/*.test.js' --ignore '**/*.stories.js' -s inline",
     "build:storybook": "build-storybook -c .storybook -o docs",
     "prepublishOnly": "npm test && npm run build",
     "start": "start-storybook"
