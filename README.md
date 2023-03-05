@@ -62,7 +62,7 @@ If image size is smaller than the container size, zoom controls and minimap will
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org)
+- [Node.js 16](https://nodejs.org/en/download/releases)
 
 ### Start
 
