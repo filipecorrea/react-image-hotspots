@@ -4,13 +4,10 @@ on:
   push:
     branches:
       - '*'
-    paths:
-      - src
     paths-ignore:
       - 'docs/**'
       - 'LICENSE'
       - 'README.md'
-      - '**/*.test.js'
   schedule:
     - cron: '40 15 * * 6'  
 
