@@ -1,0 +1,19 @@
+# Changelog
+
+## [2.1.0](https://github.com/filipecorrea/react-image-hotspots/compare/v2.0.0...v2.1.0) (2023-03-06)
+
+
+### Features
+
+* release workflow ([087208b](https://github.com/filipecorrea/react-image-hotspots/commit/087208b2ec35a2cae2755ad88762bc16ab8179aa))
+
+
+### Bug Fixes
+
+* dev prerequisites ([632938c](https://github.com/filipecorrea/react-image-hotspots/commit/632938c26f38b7d2e9b67881c6b3b11cafb51f6b))
+* job names ([83ba6e4](https://github.com/filipecorrea/react-image-hotspots/commit/83ba6e43bcf7c945bc327a68cd89f96bb94c5c72))
+* npm ci ([d46d0ab](https://github.com/filipecorrea/react-image-hotspots/commit/d46d0aba1edeb652f7cfa4bf1f9ba63f81a099f2))
+* paths ([5c58631](https://github.com/filipecorrea/react-image-hotspots/commit/5c58631ba641d441d639222929e3f5eda34430c6))
+* remove duplicate ([2e2feda](https://github.com/filipecorrea/react-image-hotspots/commit/2e2fedac84b7ae2411c2adef45851fe2bac1343f))
+* scope ([bb28a78](https://github.com/filipecorrea/react-image-hotspots/commit/bb28a7863149c69bc892a7364b396dcb049d70cb))
+* test scope ([74b2826](https://github.com/filipecorrea/react-image-hotspots/commit/74b2826f27ae4976257ea3af4c1bdb7508dddeac))
