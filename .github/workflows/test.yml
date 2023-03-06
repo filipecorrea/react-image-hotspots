@@ -2,12 +2,7 @@ name: Test
 
 on:
   push:
-    branches:
-      - '*'
-    paths-ignore:
-      - 'docs/**'
-      - 'LICENSE'
-      - 'README.md'
+    branches: [ '*' ]
 
 jobs:
   test:

@@ -2,16 +2,39 @@ name: Release
 
 on:
   push:
-    branches:
-      - master
+    branches: [ main ]
 
 jobs:
   release:
-    name: GitHub
+    name: Release
     runs-on: ubuntu-latest
+    outputs:
+      created: ${{ steps.release.outputs.release_created }}
     steps:
       - name: Release
         uses: google-github-actions/release-please-action@v3
+        id: release
         with:
           release-type: node
           package-name: react-image-hotspots
+  publish:
+    name: Publish
+    needs: release
+    runs-on: ubuntu-latest
+    if: ${{ needs.release.outputs.created }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install modules
+        run: npm ci
+      - name: Build
+        run: npm run build --if-present
+      - name: Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
