@@ -6,7 +6,7 @@ on:
 
 jobs:
   release:
-    name: Release
+    name: Version
     runs-on: ubuntu-latest
     outputs:
       created: ${{ steps.release.outputs.release_created }}
