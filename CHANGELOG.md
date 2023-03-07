@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.3](https://github.com/filipecorrea/react-image-hotspots/compare/v2.1.2...v2.1.3) (2023-03-07)
+
+
+### Bug Fixes
+
+* dependabot tests ([e09a924](https://github.com/filipecorrea/react-image-hotspots/commit/e09a92427c47c956ef847ee527f9f33004922f80))
+
 ## [2.1.2](https://github.com/filipecorrea/react-image-hotspots/compare/v2.1.1...v2.1.2) (2023-03-07)
 
 
