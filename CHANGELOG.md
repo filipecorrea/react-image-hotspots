@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.2](https://github.com/filipecorrea/react-image-hotspots/compare/v2.1.1...v2.1.2) (2023-03-07)
+
+
+### Bug Fixes
+
+* release job name ([0c1d930](https://github.com/filipecorrea/react-image-hotspots/commit/0c1d930a00ef51637c1935674b44f6104362a204))
+* simplify ([d904e9e](https://github.com/filipecorrea/react-image-hotspots/commit/d904e9ebdc8ef95070825a5ed55f7717661536d5))
+
 ## [2.1.1](https://github.com/filipecorrea/react-image-hotspots/compare/v2.1.0...v2.1.1) (2023-03-06)
 
 
