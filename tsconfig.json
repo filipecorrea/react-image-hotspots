@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "**/*.stories.js",
+    "**/*.test.js"
+  ]
+}
