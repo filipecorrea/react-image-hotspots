@@ -11,10 +11,10 @@
     "pretest": "standard",
     "test": "jest",
     "lint": "standard --fix",
-    "build": "babel ./src --out-dir ./dist -s inline",
-    "build:prod": "babel ./src --out-dir ./dist --ignore '**/*.test.js' --ignore '**/*.stories.js' -s inline",
+    "prebuild": "rimraf dist",
+    "build": "babel ./src --out-dir dist -s inline",
+    "postbuild": "tsc",
     "build:storybook": "build-storybook -c .storybook -o docs",
-    "prepublishOnly": "npm test && npm run build",
     "start": "start-storybook"
   },
   "repository": {
@@ -62,7 +62,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",
-    "standard": "^13.1.0"
+    "rimraf": "^4.4.0",
+    "standard": "^13.1.0",
+    "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "react": "^18.2.0"
