@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1](https://github.com/filipecorrea/react-image-hotspots/compare/v2.2.0...v2.2.1) (2023-03-10)
+
+
+### Bug Fixes
+
+* dont ignore stories ([1fb651c](https://github.com/filipecorrea/react-image-hotspots/commit/1fb651c982cd9c76e7ca51ae3aba63486c002e87))
+
 ## [2.2.0](https://github.com/filipecorrea/react-image-hotspots/compare/v2.1.3...v2.2.0) (2023-03-10)
 
 
