@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/filipecorrea/react-image-hotspots/compare/v2.1.3...v2.2.0) (2023-03-10)
+
+
+### Features
+
+* typescript declaration files ([c47c1f8](https://github.com/filipecorrea/react-image-hotspots/commit/c47c1f8ae98629826eec86cba1e40690d25dfa2d))
+
 ## [2.1.3](https://github.com/filipecorrea/react-image-hotspots/compare/v2.1.2...v2.1.3) (2023-03-07)
 
 
