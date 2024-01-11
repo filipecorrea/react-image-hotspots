@@ -63,7 +63,7 @@
     "react-dom": "^18.2.0",
     "react-test-renderer": "^18.2.0",
     "rimraf": "^4.4.0",
-    "standard": "^13.1.0",
+    "standard": "^16.0.4",
     "typescript": "^5.0.4"
   },
   "peerDependencies": {
