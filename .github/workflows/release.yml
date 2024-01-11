@@ -16,7 +16,6 @@ jobs:
         id: release
         with:
           release-type: node
-          package-name: react-image-hotspots
   publish:
     name: Publish
     needs: release
@@ -28,7 +27,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 16
           registry-url: 'https://registry.npmjs.org'
       - name: Install modules
         run: npm ci
