@@ -3,12 +3,14 @@ import PropTypes from 'prop-types'
 
 class Hotspot extends React.Component {
   render () {
-    const { x, y, content, style = {
-      fontFamily: 'Sans-Serif',
-      background: 'white',
-      boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.5)',
-      pointerEvents: 'auto'
-    } } = this.props
+    const {
+      x, y, content, style = {
+        fontFamily: 'Sans-Serif',
+        background: 'white',
+        boxShadow: '0px 0px 2px 0px rgba(0,0,0,0.5)',
+        pointerEvents: 'auto'
+      }
+    } = this.props
 
     const hotspotStyle = Object.assign({
       position: 'absolute',
@@ -17,7 +19,7 @@ class Hotspot extends React.Component {
       left: x + '%'
     }, style)
 
-    return <div style={hotspotStyle}>{ content }</div>
+    return <div style={hotspotStyle}>{content}</div>
   }
 }
 

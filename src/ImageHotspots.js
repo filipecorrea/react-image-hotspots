@@ -143,12 +143,12 @@ class ImageHotspots extends React.Component {
             : image.offsetX,
         offsetY: image.offsetY >= 0
           ? (container.height > image.height)
-            ? container.height / 2 - image.height / 2
-            : 0
+              ? container.height / 2 - image.height / 2
+              : 0
           : deltaY >= 0
             ? (container.height > image.height)
-              ? container.height / 2 - image.height / 2
-              : offsetYMax
+                ? container.height / 2 - image.height / 2
+                : offsetYMax
             : image.offsetY
       },
       minimap: {
@@ -168,7 +168,7 @@ class ImageHotspots extends React.Component {
     }))
   }
 
-  onImageLoad = ({ target: image }) => {
+  handleOnImageLoad = ({ target: image }) => {
     const { offsetWidth: initialWidth, offsetHeight: initialHeight } = image
     const { container, minimap, hideZoomControls, hideMinimap } = this.state
     const orientation = (initialWidth > initialHeight) ? 'landscape' : 'portrait'
@@ -178,24 +178,24 @@ class ImageHotspots extends React.Component {
 
     const width = container.orientation === orientation
       ? orientation === 'landscape'
-        ? ratio >= container.ratio
-          ? container.width // landscape image bigger than landscape container
-          : container.height * ratio // landscape image smaller than landscape container
-        : ratio >= container.ratio
-          ? container.height / ratio // portrait image bigger than portrait container
-          : container.width // portrait image smaller than portrait container
+          ? ratio >= container.ratio
+              ? container.width // landscape image bigger than landscape container
+              : container.height * ratio // landscape image smaller than landscape container
+          : ratio >= container.ratio
+            ? container.height / ratio // portrait image bigger than portrait container
+            : container.width // portrait image smaller than portrait container
       : orientation === 'landscape'
         ? container.width // landscape image and portrait container
         : container.height / ratio // portrait image and landscape container
 
     const height = container.orientation === orientation
       ? orientation === 'landscape'
-        ? ratio >= container.ratio
-          ? container.width / ratio // landscape image bigger than landscape container
-          : container.height // landscape image smaller than landscape container
-        : ratio >= container.ratio
-          ? container.height // portrait image bigger than portrait container
-          : container.width * ratio // portrait image smaller than portrait container
+          ? ratio >= container.ratio
+              ? container.width / ratio // landscape image bigger than landscape container
+              : container.height // landscape image smaller than landscape container
+          : ratio >= container.ratio
+            ? container.height // portrait image bigger than portrait container
+            : container.width * ratio // portrait image smaller than portrait container
       : orientation === 'landscape'
         ? container.width / ratio // landscape image and portrait container
         : container.height // portrait image and landscape container
@@ -265,24 +265,24 @@ class ImageHotspots extends React.Component {
 
       const width = container.orientation === image.orientation
         ? image.orientation === 'landscape'
-          ? image.ratio >= container.ratio
-            ? container.width * scale// landscape image bigger than landscape container
-            : container.height * image.ratio * scale// landscape image smaller than landscape container
-          : image.ratio >= container.ratio
-            ? container.height / image.ratio * scale// portrait image bigger than portrait container
-            : container.width * scale// portrait image smaller than portrait container
+            ? image.ratio >= container.ratio
+                ? container.width * scale// landscape image bigger than landscape container
+                : container.height * image.ratio * scale// landscape image smaller than landscape container
+            : image.ratio >= container.ratio
+              ? container.height / image.ratio * scale// portrait image bigger than portrait container
+              : container.width * scale// portrait image smaller than portrait container
         : image.orientation === 'landscape'
           ? container.width * scale// landscape image and portrait container
           : container.height / image.ratio * scale// portrait image and landscape container
 
       const height = container.orientation === image.orientation
         ? image.orientation === 'landscape'
-          ? image.ratio >= container.ratio
-            ? container.width / image.ratio * scale// landscape image bigger than landscape container
-            : container.height * scale// landscape image smaller than landscape container
-          : image.ratio >= container.ratio
-            ? container.height * scale// portrait image bigger than portrait container
-            : container.width * image.ratio * scale// portrait image smaller than portrait container
+            ? image.ratio >= container.ratio
+                ? container.width / image.ratio * scale// landscape image bigger than landscape container
+                : container.height * scale// landscape image smaller than landscape container
+            : image.ratio >= container.ratio
+              ? container.height * scale// portrait image bigger than portrait container
+              : container.width * image.ratio * scale// portrait image smaller than portrait container
         : image.orientation === 'landscape'
           ? container.width / image.ratio * scale// landscape image and portrait container
           : container.height * scale// portrait image and landscape container
@@ -508,35 +508,35 @@ class ImageHotspots extends React.Component {
       >
         {
           src &&
-          <img
-            src={src}
-            alt={alt}
-            onLoad={this.onImageLoad}
-            style={imageStyle}
-            onMouseDown={event => {
-              if (!hideZoomControls && draggable) {
-                this.startDrag(event, 'image')
-              }
-            }}
-            onMouseMove={event => {
-              if (!hideZoomControls && dragging) {
-                this.whileDrag(event)
-              }
-            }}
-            onMouseUp={event => {
-              if (dragging) {
-                this.stopDrag(event)
-              }
-            }}
-          />
+            <img
+              src={src}
+              alt={alt}
+              onLoad={this.handleOnImageLoad}
+              style={imageStyle}
+              onMouseDown={event => {
+                if (!hideZoomControls && draggable) {
+                  this.startDrag(event, 'image')
+                }
+              }}
+              onMouseMove={event => {
+                if (!hideZoomControls && dragging) {
+                  this.whileDrag(event)
+                }
+              }}
+              onMouseUp={event => {
+                if (dragging) {
+                  this.stopDrag(event)
+                }
+              }}
+            />
         }
         {
           hotspots &&
-          <div style={hotspotsStyle}>
-            {
+            <div style={hotspotsStyle}>
+              {
               hotspots.map((hotspot, i) => <Hotspot key={i} {...hotspot} />)
             }
-          </div>
+            </div>
         }
         {
           !hideFullscreenControl &&
@@ -565,9 +565,8 @@ class ImageHotspots extends React.Component {
               {
                 !hideMinimap &&
                   <div style={minimapStyle}>
-                    { src &&
-                    <img src={src} width={minimapStyle.width} height={minimapStyle.height} />
-                    }
+                    {src &&
+                      <img src={src} width={minimapStyle.width} height={minimapStyle.height} />}
                     <div style={guideStyle} />
                   </div>
               }
