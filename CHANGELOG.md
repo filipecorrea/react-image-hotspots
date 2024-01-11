@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.2](https://github.com/filipecorrea/react-image-hotspots/compare/v2.2.1...v2.2.2) (2024-01-11)
+
+
+### Bug Fixes
+
+* duplicate tests ([aeff1dc](https://github.com/filipecorrea/react-image-hotspots/commit/aeff1dcf45aabaee5bec0a9129f6dc45c1135f26))
+
 ## [2.2.1](https://github.com/filipecorrea/react-image-hotspots/compare/v2.2.0...v2.2.1) (2023-03-10)
 
 
