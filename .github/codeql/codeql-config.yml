@@ -1,0 +1,7 @@
+paths:
+  - dist
+  - src
+paths-ignore:
+  - docs
+  - node_modules
+  - '**/*.test.js'
