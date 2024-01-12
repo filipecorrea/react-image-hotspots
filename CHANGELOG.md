@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.2.3](https://github.com/filipecorrea/react-image-hotspots/compare/v2.2.2...v2.2.3) (2024-01-12)
+
+
+### Bug Fixes
+
+* config codeql ([bac290b](https://github.com/filipecorrea/react-image-hotspots/commit/bac290b479fd7d6d71e09e93bd4af6bb7f2f2d11))
+* remove codeql config file ([8114281](https://github.com/filipecorrea/react-image-hotspots/commit/8114281de0e2fa0db23f389a1687d66d518d25e1))
+* simplify ([632bf73](https://github.com/filipecorrea/react-image-hotspots/commit/632bf7363d04b9c453b6cc3409f2c50e226a6711))
+
 ## [2.2.2](https://github.com/filipecorrea/react-image-hotspots/compare/v2.2.1...v2.2.2) (2024-01-11)
 
 
