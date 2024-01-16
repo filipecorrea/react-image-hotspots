@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.5](https://github.com/filipecorrea/react-image-hotspots/compare/v2.2.4...v2.2.5) (2024-01-16)
+
+
+### Bug Fixes
+
+* exclude tests and stories ([e1ba1c3](https://github.com/filipecorrea/react-image-hotspots/commit/e1ba1c3551b85dc2b2686363a8fc5a786144e1f1))
+* jest config ([60955a3](https://github.com/filipecorrea/react-image-hotspots/commit/60955a3e10a6aceccb721912f7b7754a339bd5ab))
+
 ## [2.2.4](https://github.com/filipecorrea/react-image-hotspots/compare/v2.2.3...v2.2.4) (2024-01-15)
 
 
