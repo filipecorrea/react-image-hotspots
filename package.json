@@ -13,7 +13,7 @@
     "lint": "standard --fix",
     "prebuild": "rm -rf dist",
     "build": "babel ./src --out-dir dist -s inline",
-    "postbuild": "tsc",
+    "postbuild": "rm -rf dist/*.test.js && tsc",
     "build:storybook": "storybook build -c .storybook -o docs",
     "start": "storybook dev"
   },
@@ -84,7 +84,12 @@
     "moduleNameMapper": {
       "^.+\\.(css|sass|scss|less)$": "<rootDir>/mock/empty-module.js",
       "^.+\\.(png|jpg|jpeg|gif)$": "<rootDir>/mock/empty-module.js"
-    }
+    },
+    "testPathIgnorePatterns": [
+      "node_modules",
+      "dist",
+      "docs"
+    ]
   },
   "browserslist": {
     "production": [

@@ -7,7 +7,6 @@
     "@babel/plugin-proposal-class-properties"
   ],
   "ignore": [
-    "**/*.stories.js",
-    "**/*.test.js"
+    "**/*.stories.js"
   ]
 }
