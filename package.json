@@ -1,6 +1,6 @@
 {
   "name": "react-image-hotspots",
-  "version": "2.2.5",
+  "version": "1.0.0",
   "description": "React component for rendering images with hotspots",
   "main": "dist/ImageHotspots.js",
   "files": [
