@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/filipecorrea/react-image-hotspots/compare/v1.0.0...v1.0.1) (2024-12-18)
+
+
+### Bug Fixes
+
+* lock versions ([6b8bb01](https://github.com/filipecorrea/react-image-hotspots/commit/6b8bb017b14b20e5c82a58834d34b33959a77f81))
+
 ## 1.0.0 (2024-10-31)
 
 
