@@ -64,7 +64,7 @@
     "react-test-renderer": "18.2.0",
     "standard": "16.0.4",
     "storybook": "8.0.10",
-    "typescript": "5.0.4",
+    "typescript": "5.7.2",
     "webpack": "5.97.1"
   },
   "peerDependencies": {
