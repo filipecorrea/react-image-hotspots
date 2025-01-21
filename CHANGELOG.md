@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/filipecorrea/react-image-hotspots/compare/v1.0.1...v1.1.0) (2025-01-21)
+
+
+### Features
+
+* test node 22 ([adaa960](https://github.com/filipecorrea/react-image-hotspots/commit/adaa960f6b68ae9e551173621bdf84a5d5493270))
+
+
+### Bug Fixes
+
+* lock ubuntu ([1de2d49](https://github.com/filipecorrea/react-image-hotspots/commit/1de2d498a1838448ef6643b4da36604db1e92a07))
+
 ## [1.0.1](https://github.com/filipecorrea/react-image-hotspots/compare/v1.0.0...v1.0.1) (2024-12-18)
 
 
