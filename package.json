@@ -49,7 +49,7 @@
     "@storybook/addon-controls": "8.4.7",
     "@storybook/addon-essentials": "8.0.10",
     "@storybook/addon-interactions": "8.4.7",
-    "@storybook/addon-links": "8.4.7",
+    "@storybook/addon-links": "8.5.3",
     "@storybook/react": "8.5.3",
     "@storybook/react-webpack5": "8.0.10",
     "@storybook/testing-library": "0.2.2",
