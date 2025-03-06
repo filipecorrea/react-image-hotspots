@@ -48,7 +48,7 @@
     "@storybook/addon-actions": "8.5.3",
     "@storybook/addon-controls": "8.4.7",
     "@storybook/addon-essentials": "8.0.10",
-    "@storybook/addon-interactions": "8.5.6",
+    "@storybook/addon-interactions": "8.6.4",
     "@storybook/addon-links": "8.5.3",
     "@storybook/react": "8.6.3",
     "@storybook/react-webpack5": "8.5.6",
