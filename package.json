@@ -46,7 +46,7 @@
     "@babel/preset-env": "7.26.9",
     "@babel/preset-react": "7.26.3",
     "@storybook/addon-actions": "8.5.3",
-    "@storybook/addon-controls": "8.4.7",
+    "@storybook/addon-controls": "8.6.4",
     "@storybook/addon-essentials": "8.0.10",
     "@storybook/addon-interactions": "8.6.4",
     "@storybook/addon-links": "8.6.4",
