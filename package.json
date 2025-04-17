@@ -60,7 +60,7 @@
     "jest-environment-jsdom": "29.7.0",
     "prop-types": "15.8.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react-dom": "19.1.0",
     "react-test-renderer": "18.2.0",
     "standard": "16.0.4",
     "storybook": "8.6.7",
