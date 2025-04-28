@@ -65,7 +65,7 @@
     "standard": "16.0.4",
     "storybook": "8.6.7",
     "typescript": "5.8.3",
-    "webpack": "5.98.0"
+    "webpack": "5.99.7"
   },
   "peerDependencies": {
     "react": "18.2.0"
