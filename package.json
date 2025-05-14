@@ -63,7 +63,7 @@
     "react-dom": "18.2.0",
     "react-test-renderer": "18.2.0",
     "standard": "16.0.4",
-    "storybook": "8.6.7",
+    "storybook": "8.6.12",
     "typescript": "5.8.3",
     "webpack": "5.99.8"
   },
