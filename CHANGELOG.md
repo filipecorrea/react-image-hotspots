@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.6.0](https://github.com/filipecorrea/react-image-hotspots/compare/v1.5.0...v1.6.0) (2025-06-05)
+
+
+### Features
+
+* workflow permissions ([e6dd2c8](https://github.com/filipecorrea/react-image-hotspots/commit/e6dd2c84f2248af1177def22f156e518d4f07d02))
+
+
+### Bug Fixes
+
+* contents permission ([22eb415](https://github.com/filipecorrea/react-image-hotspots/commit/22eb415fd895771368664e2d5bad3abfb16a68c1))
+* permission ([fac3211](https://github.com/filipecorrea/react-image-hotspots/commit/fac3211bb190cc55a38e4cf569d18d0cc2dc680d))
+
 ## [1.5.0](https://github.com/filipecorrea/react-image-hotspots/compare/v1.4.0...v1.5.0) (2025-01-28)
 
 
