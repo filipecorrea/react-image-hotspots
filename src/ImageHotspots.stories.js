@@ -11,7 +11,7 @@ const hotspots = [
 ]
 
 export default {
-  title: 'Image Hostpots',
+  title: 'Image Hotspots',
   component: ImageHotspots
 }
 
