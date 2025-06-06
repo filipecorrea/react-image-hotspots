@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.7.0](https://github.com/filipecorrea/react-image-hotspots/compare/v1.6.0...v1.7.0) (2025-06-06)
+
+
+### Features
+
+* test node 22 ([adaa960](https://github.com/filipecorrea/react-image-hotspots/commit/adaa960f6b68ae9e551173621bdf84a5d5493270))
+* workflow permissions ([e6dd2c8](https://github.com/filipecorrea/react-image-hotspots/commit/e6dd2c84f2248af1177def22f156e518d4f07d02))
+
+
+### Bug Fixes
+
+* config codeql ([bac290b](https://github.com/filipecorrea/react-image-hotspots/commit/bac290b479fd7d6d71e09e93bd4af6bb7f2f2d11))
+* contents permission ([22eb415](https://github.com/filipecorrea/react-image-hotspots/commit/22eb415fd895771368664e2d5bad3abfb16a68c1))
+* dont ignore stories ([1fb651c](https://github.com/filipecorrea/react-image-hotspots/commit/1fb651c982cd9c76e7ca51ae3aba63486c002e87))
+* duplicate tests ([aeff1dc](https://github.com/filipecorrea/react-image-hotspots/commit/aeff1dcf45aabaee5bec0a9129f6dc45c1135f26))
+* exclude tests and stories ([e1ba1c3](https://github.com/filipecorrea/react-image-hotspots/commit/e1ba1c3551b85dc2b2686363a8fc5a786144e1f1))
+* jest config ([60955a3](https://github.com/filipecorrea/react-image-hotspots/commit/60955a3e10a6aceccb721912f7b7754a339bd5ab))
+* lock ubuntu ([1de2d49](https://github.com/filipecorrea/react-image-hotspots/commit/1de2d498a1838448ef6643b4da36604db1e92a07))
+* lock versions ([6b8bb01](https://github.com/filipecorrea/react-image-hotspots/commit/6b8bb017b14b20e5c82a58834d34b33959a77f81))
+* permission ([fac3211](https://github.com/filipecorrea/react-image-hotspots/commit/fac3211bb190cc55a38e4cf569d18d0cc2dc680d))
+* remove codeql config file ([8114281](https://github.com/filipecorrea/react-image-hotspots/commit/8114281de0e2fa0db23f389a1687d66d518d25e1))
+* simplify ([632bf73](https://github.com/filipecorrea/react-image-hotspots/commit/632bf7363d04b9c453b6cc3409f2c50e226a6711))
+* test node 20 ([4128d41](https://github.com/filipecorrea/react-image-hotspots/commit/4128d416ed1c4267545a0236b8d0dbc316716cd8))
+
 ## [2.2.5](https://github.com/filipecorrea/react-image-hotspots/compare/v2.2.4...v2.2.5) (2023-12-01)
 
 
