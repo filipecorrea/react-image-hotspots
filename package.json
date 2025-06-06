@@ -12,7 +12,7 @@
     "test": "jest",
     "lint": "standard --fix",
     "prebuild": "rm -rf dist",
-    "build": "babel ./src --out-dir dist -s inline",
+    "build": "swc ./src --out-dir dist --source-maps inline",
     "postbuild": "rm -rf dist/*.test.js && tsc",
     "build:storybook": "storybook build -c .storybook -o docs",
     "start": "storybook dev"
@@ -40,11 +40,11 @@
   },
   "homepage": "https://github.com/filipecorrea/react-image-hotspots#readme",
   "devDependencies": {
-    "@babel/cli": "7.27.2",
-    "@babel/core": "7.27.1",
-    "@babel/plugin-proposal-class-properties": "7.18.6",
-    "@babel/preset-env": "7.27.2",
-    "@babel/preset-react": "7.27.1",
+    "@babel/core": "^7.27.4",
+    "@babel/eslint-parser": "^7.27.5",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
     "@storybook/addon-actions": "8.6.14",
     "@storybook/addon-controls": "8.6.14",
     "@storybook/addon-essentials": "8.0.10",
@@ -53,9 +53,11 @@
     "@storybook/react": "8.6.12",
     "@storybook/react-webpack5": "8.6.14",
     "@storybook/testing-library": "0.2.2",
+    "@swc/cli": "^0.4.0",
+    "@swc/core": "^1.11.31",
+    "@swc/jest": "^0.2.38",
     "@testing-library/react": "16.3.0",
-    "babel-eslint": "10.1.0",
-    "babel-loader": "9.2.1",
+    "babel-loader": "^10.0.0",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "prop-types": "15.8.1",
@@ -64,6 +66,7 @@
     "react-test-renderer": "18.2.0",
     "standard": "16.0.4",
     "storybook": "8.6.14",
+    "swc-loader": "^0.2.6",
     "typescript": "5.8.3",
     "webpack": "5.99.9"
   },
@@ -74,13 +77,16 @@
     "env": [
       "jest"
     ],
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "ignore": [
       "docs/"
     ]
   },
   "jest": {
     "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.(js|jsx)$": "@swc/jest"
+    },
     "moduleNameMapper": {
       "^.+\\.(css|sass|scss|less)$": "<rootDir>/mock/empty-module.js",
       "^.+\\.(png|jpg|jpeg|gif)$": "<rootDir>/mock/empty-module.js"
