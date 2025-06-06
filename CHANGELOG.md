@@ -1,5 +1,31 @@
 # Changelog
 
+## [2.3.0](https://github.com/filipecorrea/react-image-hotspots/compare/v2.2.5...v2.3.0) (2025-06-06)
+
+
+### Features
+
+* swc ([95b9dd3](https://github.com/filipecorrea/react-image-hotspots/commit/95b9dd329f11be04c6212187675cf2aead0e1555))
+* swc ([#453](https://github.com/filipecorrea/react-image-hotspots/issues/453)) ([a8e55e0](https://github.com/filipecorrea/react-image-hotspots/commit/a8e55e0c26ffd3bcb154a887b4353ae9a63fea32))
+* test node 22 ([adaa960](https://github.com/filipecorrea/react-image-hotspots/commit/adaa960f6b68ae9e551173621bdf84a5d5493270))
+* workflow permissions ([e6dd2c8](https://github.com/filipecorrea/react-image-hotspots/commit/e6dd2c84f2248af1177def22f156e518d4f07d02))
+
+
+### Bug Fixes
+
+* contents permission ([22eb415](https://github.com/filipecorrea/react-image-hotspots/commit/22eb415fd895771368664e2d5bad3abfb16a68c1))
+* lock ubuntu ([1de2d49](https://github.com/filipecorrea/react-image-hotspots/commit/1de2d498a1838448ef6643b4da36604db1e92a07))
+* lock versions ([6b8bb01](https://github.com/filipecorrea/react-image-hotspots/commit/6b8bb017b14b20e5c82a58834d34b33959a77f81))
+* permission ([fac3211](https://github.com/filipecorrea/react-image-hotspots/commit/fac3211bb190cc55a38e4cf569d18d0cc2dc680d))
+* typo ([b7489c8](https://github.com/filipecorrea/react-image-hotspots/commit/b7489c85e628febf35dfd0dcedf1b64bda3da927))
+* typo ([f576ec3](https://github.com/filipecorrea/react-image-hotspots/commit/f576ec394abfc3234ee8c1a788d24bf9a9e9971f))
+
+
+### Miscellaneous Chores
+
+* release 2.2.5 ([3133de8](https://github.com/filipecorrea/react-image-hotspots/commit/3133de8a81c56a6dbec74214b8be619e32d1cea5))
+* release 2.3.0 ([b24ff1c](https://github.com/filipecorrea/react-image-hotspots/commit/b24ff1c64f091d1e8ed273f2c9160a42e36739da))
+
 ## [2.2.5](https://github.com/filipecorrea/react-image-hotspots/compare/v1.6.0...v2.2.5) (2025-06-06)
 
 
