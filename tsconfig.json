@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
     "target": "es2019",
+    "lib": ["dom", "dom.iterable", "es6"],
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "allowJs": true,
     "outDir": "dist",
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "skipLibCheck": true,
+    "types": ["react", "react-dom"]
   },
   "include": [
     "src"

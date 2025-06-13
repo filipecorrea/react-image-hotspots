@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.3.2](https://github.com/filipecorrea/react-image-hotspots/compare/v2.3.1...v2.3.2) (2025-06-12)
+
+
+### Bug Fixes
+
+* addon-essentials security ([61cc3fd](https://github.com/filipecorrea/react-image-hotspots/commit/61cc3fd359f1c14ba14e964337c3fb1703fc8ae9))
+* addon-essentials security issues ([10d65fd](https://github.com/filipecorrea/react-image-hotspots/commit/10d65fd85ebfbae31b4686c2f7c2855e34e42eb0))
+* addon-essentials security issues ([#458](https://github.com/filipecorrea/react-image-hotspots/issues/458)) ([bc07ea2](https://github.com/filipecorrea/react-image-hotspots/commit/bc07ea24fd125d1313b1d65bf78ceff1caf08361))
+
 ## [2.3.1](https://github.com/filipecorrea/react-image-hotspots/compare/v2.3.0...v2.3.1) (2025-06-06)
 
 
