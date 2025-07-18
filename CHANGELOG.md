@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.3](https://github.com/filipecorrea/react-image-hotspots/compare/v2.3.2...v2.3.3) (2025-07-18)
+
+
+### Bug Fixes
+
+* lock actions ([de3589e](https://github.com/filipecorrea/react-image-hotspots/commit/de3589eb537a95ec305a853fd888364691b477e8))
+* lock actions ([#462](https://github.com/filipecorrea/react-image-hotspots/issues/462)) ([9903102](https://github.com/filipecorrea/react-image-hotspots/commit/9903102c8ea77f4aa44897ff2fe04a9c80053561))
+
 ## [2.3.2](https://github.com/filipecorrea/react-image-hotspots/compare/v2.3.1...v2.3.2) (2025-06-12)
 
 
