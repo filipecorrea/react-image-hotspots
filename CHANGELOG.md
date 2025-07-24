@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.0](https://github.com/filipecorrea/react-image-hotspots/compare/v2.3.3...v2.4.0) (2025-07-24)
+
+
+### Features
+
+* node 24 ([b863fe3](https://github.com/filipecorrea/react-image-hotspots/commit/b863fe3cbae353e72f68279f27340f75b7b4a249))
+* node 24 ([#465](https://github.com/filipecorrea/react-image-hotspots/issues/465)) ([6c472b2](https://github.com/filipecorrea/react-image-hotspots/commit/6c472b2f33923afc9e0e441735f5df2d3f8c40c5))
+
 ## [2.3.3](https://github.com/filipecorrea/react-image-hotspots/compare/v2.3.2...v2.3.3) (2025-07-18)
 
 
