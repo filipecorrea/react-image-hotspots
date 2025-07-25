@@ -12,7 +12,7 @@ permissions:
 jobs:
   test:
     name: Node
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         node-version: [ 16, 18, 20, 22, 24 ]
