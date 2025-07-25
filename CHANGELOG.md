@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.5.0](https://github.com/filipecorrea/react-image-hotspots/compare/v2.4.0...v2.5.0) (2025-07-25)
+
+
+### Features
+
+* ubuntu 24 ([554a1fc](https://github.com/filipecorrea/react-image-hotspots/commit/554a1fcab46814791e42be2da3c35bc87d718077))
+* ubuntu 24 ([#467](https://github.com/filipecorrea/react-image-hotspots/issues/467)) ([5d39fb1](https://github.com/filipecorrea/react-image-hotspots/commit/5d39fb145d5a9f0239cd22eb629197b1f1a34143))
+
 ## [2.4.0](https://github.com/filipecorrea/react-image-hotspots/compare/v2.3.3...v2.4.0) (2025-07-24)
 
 
