@@ -11,7 +11,7 @@ permissions:
 jobs:
   release:
     name: Version
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       created: ${{ steps.release.outputs.release_created }}
     steps:
@@ -23,7 +23,7 @@ jobs:
   publish:
     name: Publish
     needs: release
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     if: ${{ needs.release.outputs.created }}
     steps:
       - name: Checkout
