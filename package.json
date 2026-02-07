@@ -70,7 +70,7 @@
     "storybook": "8.6.15",
     "swc-loader": "0.2.6",
     "typescript": "5.8.3",
-    "webpack": "5.99.9"
+    "webpack": "5.105.0"
   },
   "peerDependencies": {
     "react": "18.2.0"
