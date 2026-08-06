@@ -14,7 +14,7 @@
     "prebuild": "rm -rf dist",
     "build": "swc ./src --out-dir dist --source-maps inline",
     "postbuild": "rm -rf dist/*.test.js && tsc",
-    "build:storybook": "storybook build -c .storybook -o docs",
+    "build:storybook": "storybook build -c .storybook -o docs && touch docs/.nojekyll",
     "start": "storybook dev"
   },
   "repository": {
