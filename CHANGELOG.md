@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.5.1](https://github.com/filipecorrea/react-image-hotspots/compare/v2.5.0...v2.5.1) (2026-08-06)
+
+
+### Bug Fixes
+
+* storebook ([82849b7](https://github.com/filipecorrea/react-image-hotspots/commit/82849b7ca6f2988af03f76a5af1fb43fe15583df))
+* storebook ([#509](https://github.com/filipecorrea/react-image-hotspots/issues/509)) ([10462c3](https://github.com/filipecorrea/react-image-hotspots/commit/10462c3681ddfa40dbac8cd661f3e178eb7184cb))
+
 ## [2.5.0](https://github.com/filipecorrea/react-image-hotspots/compare/v2.4.0...v2.5.0) (2025-07-25)
 
 
