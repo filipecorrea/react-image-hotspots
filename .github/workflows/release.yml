@@ -16,7 +16,7 @@ jobs:
       created: ${{ steps.release.outputs.release_created }}
     steps:
       - name: Release
-        uses: google-github-actions/release-please-action@e4dc86ba9405554aeba3c6bb2d169500e7d3b4ee # v4.1.1
+        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
         id: release
         with:
           release-type: node
@@ -31,7 +31,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: 16
+          node-version: 20
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: npm ci
