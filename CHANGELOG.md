@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.6.0](https://github.com/filipecorrea/react-image-hotspots/compare/v2.5.1...v2.6.0) (2026-08-07)
+
+
+### Features
+
+* node 24 ([cb61697](https://github.com/filipecorrea/react-image-hotspots/commit/cb61697c3d5c0ebc9819d92af35e401546a99c22))
+* node 24 ([#511](https://github.com/filipecorrea/react-image-hotspots/issues/511)) ([a026e35](https://github.com/filipecorrea/react-image-hotspots/commit/a026e358ba2ad097af82a845db56ca354664d614))
+
+
+### Bug Fixes
+
+* pin release-please to Node 20 on Actions runners ([1b8e468](https://github.com/filipecorrea/react-image-hotspots/commit/1b8e46880898ba971d6b22946a1373281915d4b7))
+* remove release please token ([0a12f08](https://github.com/filipecorrea/react-image-hotspots/commit/0a12f08c089f74262c6da9cf21580b38ec9e923b))
+* remove release please token ([#512](https://github.com/filipecorrea/react-image-hotspots/issues/512)) ([da1367a](https://github.com/filipecorrea/react-image-hotspots/commit/da1367ab3b4040096304240c23d270ca6f561727))
+* token ([a9ac3e8](https://github.com/filipecorrea/react-image-hotspots/commit/a9ac3e8c776bc64b1a787bd0c9e4a406a1e40831))
+* upgrade release-please-action to googleapis v5 ([43c4c5f](https://github.com/filipecorrea/react-image-hotspots/commit/43c4c5f6ea41102fcad6ecdfaf4a312654166c44))
+* use release-please-action v4.4.1 with full permissions ([7711a8d](https://github.com/filipecorrea/react-image-hotspots/commit/7711a8d367d73692af1d7a789149ebfc0194c363))
+
 ## [2.5.1](https://github.com/filipecorrea/react-image-hotspots/compare/v2.5.0...v2.5.1) (2026-08-06)
 
 
