@@ -14,11 +14,13 @@ jobs:
   release:
     name: Version
     runs-on: ubuntu-24.04
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     outputs:
       created: ${{ steps.release.outputs.release_created }}
     steps:
       - name: Release
-        uses: googleapis/release-please-action@5c625bfb5d1ff62eadeeb3772007f7f66fdcf071 # v4.4.1
+        uses: google-github-actions/release-please-action@e4dc86ba9405554aeba3c6bb2d169500e7d3b4ee # v4.1.1
         id: release
         with:
           release-type: node
