@@ -1,6 +1,6 @@
 {
   "name": "react-image-hotspots",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "React component for rendering images with hotspots",
   "main": "dist/ImageHotspots.js",
   "files": [
@@ -14,7 +14,7 @@
     "prebuild": "rm -rf dist",
     "build": "swc ./src --out-dir dist --source-maps inline",
     "postbuild": "rm -rf dist/*.test.js && tsc",
-    "build:storybook": "storybook build -c .storybook -o docs",
+    "build:storybook": "storybook build -c .storybook -o docs && touch docs/.nojekyll",
     "start": "storybook dev"
   },
   "repository": {
@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/filipecorrea/react-image-hotspots#readme",
   "devDependencies": {
-    "@babel/core": "7.27.4",
+    "@babel/core": "7.29.6",
     "@babel/eslint-parser": "7.27.5",
     "@babel/plugin-proposal-class-properties": "7.18.6",
     "@babel/preset-env": "7.27.2",
