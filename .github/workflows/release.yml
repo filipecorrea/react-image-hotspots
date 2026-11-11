@@ -3,35 +3,43 @@ name: Release
 on:
   push:
     branches: [ master ]
+  workflow_dispatch:
 
 permissions:
   contents: write
+  issues: write
   pull-requests: write
 
 jobs:
   release:
     name: Version
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       created: ${{ steps.release.outputs.release_created }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
       - name: Release
-        uses: google-github-actions/release-please-action@v4
+        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
         id: release
         with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
           release-type: node
   publish:
     name: Publish
     needs: release
-    runs-on: ubuntu-22.04
-    if: ${{ needs.release.outputs.created }}
+    runs-on: ubuntu-24.04
+    if: ${{ needs.release.outputs.created || github.event_name == 'workflow_dispatch' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 16
+          node-version: 24
+          cache: npm
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: npm ci

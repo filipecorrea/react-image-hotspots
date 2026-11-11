@@ -1,5 +1,64 @@
 # Changelog
 
+## [2.6.0](https://github.com/filipecorrea/react-image-hotspots/compare/v2.5.1...v2.6.0) (2026-08-07)
+
+
+### Features
+
+* node 24 ([cb61697](https://github.com/filipecorrea/react-image-hotspots/commit/cb61697c3d5c0ebc9819d92af35e401546a99c22))
+* node 24 ([#511](https://github.com/filipecorrea/react-image-hotspots/issues/511)) ([a026e35](https://github.com/filipecorrea/react-image-hotspots/commit/a026e358ba2ad097af82a845db56ca354664d614))
+
+
+### Bug Fixes
+
+* pin release-please to Node 20 on Actions runners ([1b8e468](https://github.com/filipecorrea/react-image-hotspots/commit/1b8e46880898ba971d6b22946a1373281915d4b7))
+* remove release please token ([0a12f08](https://github.com/filipecorrea/react-image-hotspots/commit/0a12f08c089f74262c6da9cf21580b38ec9e923b))
+* remove release please token ([#512](https://github.com/filipecorrea/react-image-hotspots/issues/512)) ([da1367a](https://github.com/filipecorrea/react-image-hotspots/commit/da1367ab3b4040096304240c23d270ca6f561727))
+* token ([a9ac3e8](https://github.com/filipecorrea/react-image-hotspots/commit/a9ac3e8c776bc64b1a787bd0c9e4a406a1e40831))
+* upgrade release-please-action to googleapis v5 ([43c4c5f](https://github.com/filipecorrea/react-image-hotspots/commit/43c4c5f6ea41102fcad6ecdfaf4a312654166c44))
+* use release-please-action v4.4.1 with full permissions ([7711a8d](https://github.com/filipecorrea/react-image-hotspots/commit/7711a8d367d73692af1d7a789149ebfc0194c363))
+
+## [2.5.1](https://github.com/filipecorrea/react-image-hotspots/compare/v2.5.0...v2.5.1) (2026-08-06)
+
+
+### Bug Fixes
+
+* storebook ([82849b7](https://github.com/filipecorrea/react-image-hotspots/commit/82849b7ca6f2988af03f76a5af1fb43fe15583df))
+* storebook ([#509](https://github.com/filipecorrea/react-image-hotspots/issues/509)) ([10462c3](https://github.com/filipecorrea/react-image-hotspots/commit/10462c3681ddfa40dbac8cd661f3e178eb7184cb))
+
+## [2.5.0](https://github.com/filipecorrea/react-image-hotspots/compare/v2.4.0...v2.5.0) (2025-07-25)
+
+
+### Features
+
+* ubuntu 24 ([554a1fc](https://github.com/filipecorrea/react-image-hotspots/commit/554a1fcab46814791e42be2da3c35bc87d718077))
+* ubuntu 24 ([#467](https://github.com/filipecorrea/react-image-hotspots/issues/467)) ([5d39fb1](https://github.com/filipecorrea/react-image-hotspots/commit/5d39fb145d5a9f0239cd22eb629197b1f1a34143))
+
+## [2.4.0](https://github.com/filipecorrea/react-image-hotspots/compare/v2.3.3...v2.4.0) (2025-07-24)
+
+
+### Features
+
+* node 24 ([b863fe3](https://github.com/filipecorrea/react-image-hotspots/commit/b863fe3cbae353e72f68279f27340f75b7b4a249))
+* node 24 ([#465](https://github.com/filipecorrea/react-image-hotspots/issues/465)) ([6c472b2](https://github.com/filipecorrea/react-image-hotspots/commit/6c472b2f33923afc9e0e441735f5df2d3f8c40c5))
+
+## [2.3.3](https://github.com/filipecorrea/react-image-hotspots/compare/v2.3.2...v2.3.3) (2025-07-18)
+
+
+### Bug Fixes
+
+* lock actions ([de3589e](https://github.com/filipecorrea/react-image-hotspots/commit/de3589eb537a95ec305a853fd888364691b477e8))
+* lock actions ([#462](https://github.com/filipecorrea/react-image-hotspots/issues/462)) ([9903102](https://github.com/filipecorrea/react-image-hotspots/commit/9903102c8ea77f4aa44897ff2fe04a9c80053561))
+
+## [2.3.2](https://github.com/filipecorrea/react-image-hotspots/compare/v2.3.1...v2.3.2) (2025-06-12)
+
+
+### Bug Fixes
+
+* addon-essentials security ([61cc3fd](https://github.com/filipecorrea/react-image-hotspots/commit/61cc3fd359f1c14ba14e964337c3fb1703fc8ae9))
+* addon-essentials security issues ([10d65fd](https://github.com/filipecorrea/react-image-hotspots/commit/10d65fd85ebfbae31b4686c2f7c2855e34e42eb0))
+* addon-essentials security issues ([#458](https://github.com/filipecorrea/react-image-hotspots/issues/458)) ([bc07ea2](https://github.com/filipecorrea/react-image-hotspots/commit/bc07ea24fd125d1313b1d65bf78ceff1caf08361))
+
 ## [2.3.1](https://github.com/filipecorrea/react-image-hotspots/compare/v2.3.0...v2.3.1) (2025-06-06)
 
 
