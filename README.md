@@ -18,7 +18,7 @@ Or install from _yarn_ running:
 yarn add react-image-hotspots
 ```
 
-## Usage
+## Use
 
 ```jsx
 import ImageHotspots from 'react-image-hotspots'
@@ -62,7 +62,7 @@ If image size is smaller than the container size, zoom controls and minimap will
 
 ### Prerequisites
 
-- [Node.js 16](https://nodejs.org/en/download/releases)
+- [Node.js >= 16](https://nodejs.org/en/download/releases)
 
 ### Start
 
